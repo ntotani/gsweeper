@@ -1,0 +1,3 @@
+[submodule "cocos2d"]
+	path = cocos2d
+	url = https://tool.devsep.com/stash/scm/puz/cocos2d-x.git
