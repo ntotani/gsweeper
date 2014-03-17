@@ -3,4 +3,4 @@ Cocos2d-xプロジェクトの共通部分をまとめたリポジトリです�
     # fetch cocos2d-x lib
     git submodule update --init
     # create Resource dir if need
-    mkdir Resource
+    mkdir Resources
