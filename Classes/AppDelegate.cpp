@@ -50,3 +50,13 @@ void AppDelegate::applicationWillEnterForeground() {
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }
+
+void AppDelegate::screenShot(const char* fileName) {
+    auto s = Director::getInstance()->getVisibleSize();
+    auto texture = RenderTexture::create(s.width, s.height);
+    texture->setPosition(Point(s.width * 0.5f, s.height * 0.5f));
+    texture->begin();
+    Director::getInstance()->getRunningScene()->visit();
+    texture->end();
+    texture->saveToFile(fileName, Image::Format::JPG);
+}

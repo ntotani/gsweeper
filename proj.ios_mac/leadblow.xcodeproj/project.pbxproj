@@ -55,6 +55,8 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97366E2B18D06BDB00314E1C /* TitleScene.cpp */; };
+		978AD54E18D80A5B00806ED5 /* Twitter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 978AD54D18D80A5B00806ED5 /* Twitter.mm */; };
+		978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978AD54F18D80DFA00806ED5 /* Social.framework */; };
 		97D387DF18D071920087853C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D387DE18D071920087853C /* XCTest.framework */; };
 		97D387E018D071920087853C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		97D387E118D071920087853C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -293,6 +295,9 @@
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		97366E2B18D06BDB00314E1C /* TitleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleScene.cpp; sourceTree = "<group>"; };
 		97366E2C18D06BDB00314E1C /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
+		978AD54518D80A2300806ED5 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Twitter.h; path = ../../Classes/Common/Twitter.h; sourceTree = "<group>"; };
+		978AD54D18D80A5B00806ED5 /* Twitter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Twitter.mm; path = ios/Twitter.mm; sourceTree = SOURCE_ROOT; };
+		978AD54F18D80DFA00806ED5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
 		97D387DD18D071920087853C /* leadblow iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "leadblow iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D387DE18D071920087853C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		97D387E418D071920087853C /* leadblow iOS Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "leadblow iOS Tests-Info.plist"; sourceTree = "<group>"; };
@@ -318,6 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
 				1AC6FB2F180E99EB004C840B /* libchipmunk iOS.a in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */,
@@ -375,16 +381,16 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
 				503AE0FB17EB989F00D1A890 /* AppController.mm */,
+				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FC17EB989F00D1A890 /* main.m */,
 				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+				978AD54D18D80A5B00806ED5 /* Twitter.mm */,
 			);
-			name = ios;
-			path = Classes;
+			path = ios;
 			sourceTree = "<group>";
 		};
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
@@ -448,6 +454,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				978AD54F18D80DFA00806ED5 /* Social.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
 				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
 				503AE11117EB99EE00D1A890 /* libcurl.dylib */,
@@ -564,6 +571,7 @@
 				97D387F818D072A80087853C /* IRandom.h */,
 				97D387F918D072A80087853C /* RandomImpl.cpp */,
 				97D387FA18D072A80087853C /* RandomImpl.h */,
+				978AD54518D80A2300806ED5 /* Twitter.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -838,6 +846,7 @@
 				97D387FB18D072A80087853C /* RandomImpl.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				978AD54E18D80A5B00806ED5 /* Twitter.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */,

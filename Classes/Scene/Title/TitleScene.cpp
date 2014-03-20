@@ -1,4 +1,6 @@
 #include "TitleScene.h"
+#include "../../Common/Twitter.h"
+#include "AppDelegate.h"
 
 USING_NS_CC;
 
@@ -24,5 +26,19 @@ bool TitleScene::init()
                              origin.y + visibleSize.height - label->getContentSize().height));
     this->addChild(label, 1);
 
+    auto dispatcher = Director::getInstance()->getEventDispatcher();
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = [](Touch* touch, Event* event) { return true; };
+    listener->onTouchMoved = [](Touch* touch, Event* event) {};
+    listener->onTouchEnded = CC_CALLBACK_2(TitleScene::onTouchEnded, this);
+    listener->onTouchCancelled = [](Touch* touch, Event* event) {};
+    dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
     return true;
+}
+
+void TitleScene::onTouchEnded(Touch* touch, Event* event) {
+    AppDelegate::screenShot("screenshot.jpg");
+    std::string ss = FileUtils::getInstance()->getWritablePath().append("screenshot.jpg");
+    Twitter::tweet("Hello LeadBlow", ss.c_str());
 }

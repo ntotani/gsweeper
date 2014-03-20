@@ -11,12 +11,15 @@
 
 #include "cocos2d.h"
 
-class TitleScene : public cocos2d::Layer
+USING_NS_CC;
+
+class TitleScene : public Layer
 {
 public:
-    static cocos2d::Scene* createScene();
+    static Scene* createScene();
     virtual bool init();
     CREATE_FUNC(TitleScene);
+    void onTouchEnded(Touch* touch, Event* event);
 };
 
 #endif /* defined(__puzzlegirl__TitleScene__) */
