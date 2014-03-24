@@ -25,3 +25,6 @@ proj.ios_mac/*.xcodeproj/*
 # Ignore vim swaps
 *.swp
 *.swo
+
+.settings
+.classpath
