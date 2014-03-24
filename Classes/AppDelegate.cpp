@@ -14,9 +14,11 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
-    auto eglView = EGLView::getInstance();
-
-    director->setOpenGLView(eglView);
+    auto glView = director->getOpenGLView();
+    if (!glView) {
+        glView = GLView::create("leadblow");
+        director->setOpenGLView(glView);
+    }
 
 #ifdef COCOS2D_DEBUG
     // turn on display FPS

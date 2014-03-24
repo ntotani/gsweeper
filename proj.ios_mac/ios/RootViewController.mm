@@ -1,6 +1,6 @@
 #import "RootViewController.h"
 #import "cocos2d.h"
-#import "EAGLView.h"
+#import "CCEAGLView.h"
 
 @implementation RootViewController
 
@@ -47,7 +47,10 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 
-	CGSize s = CGSizeMake([[CCEAGLView sharedEGLView] getWidth], [[CCEAGLView sharedEGLView] getHeight]);
+	cocos2d::GLView *glview = cocos2d::Director::getInstance()->getOpenGLView();
+    CCEAGLView *eaglview = (CCEAGLView*) glview->getEAGLView();
+
+    CGSize s = CGSizeMake([eaglview getWidth], [eaglview getHeight]);
 
 	cocos2d::Application::getInstance()->applicationScreenSizeChanged((int) s.width, (int) s.height);
 }
