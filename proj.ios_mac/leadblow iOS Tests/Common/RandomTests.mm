@@ -42,7 +42,7 @@
     XCTAssertEqual(0, rnd->next());
     XCTAssertEqual(0, rnd->next());
     XCTAssertEqual(0, rnd->next());
-    XCTAssertEqual(10, rnd->next());
+    XCTAssertEqual(0, rnd->next());
 }
 
 @end
