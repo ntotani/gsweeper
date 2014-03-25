@@ -55,6 +55,7 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97366E2B18D06BDB00314E1C /* TitleScene.cpp */; };
+		9763853E18E04A1E000B2252 /* LBFileUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9763853D18E04A1E000B2252 /* LBFileUtils.mm */; };
 		978AD54E18D80A5B00806ED5 /* LBSocial.mm in Sources */ = {isa = PBXBuildFile; fileRef = 978AD54D18D80A5B00806ED5 /* LBSocial.mm */; };
 		978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978AD54F18D80DFA00806ED5 /* Social.framework */; };
 		97D387DF18D071920087853C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D387DE18D071920087853C /* XCTest.framework */; };
@@ -267,6 +268,8 @@
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		97366E2B18D06BDB00314E1C /* TitleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleScene.cpp; sourceTree = "<group>"; };
 		97366E2C18D06BDB00314E1C /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
+		9763853B18E049B7000B2252 /* LBFileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LBFileUtils.h; path = ../../Classes/Common/LBFileUtils.h; sourceTree = "<group>"; };
+		9763853D18E04A1E000B2252 /* LBFileUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LBFileUtils.mm; sourceTree = "<group>"; };
 		978AD54518D80A2300806ED5 /* LBSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBSocial.h; path = ../../Classes/Common/LBSocial.h; sourceTree = "<group>"; };
 		978AD54D18D80A5B00806ED5 /* LBSocial.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LBSocial.mm; path = ios/LBSocial.mm; sourceTree = SOURCE_ROOT; };
 		978AD54F18D80DFA00806ED5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
@@ -356,11 +359,12 @@
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
 				503AE0FB17EB989F00D1A890 /* AppController.mm */,
 				5087E77117EB970100C73F5D /* Icons */,
+				9763853D18E04A1E000B2252 /* LBFileUtils.mm */,
+				978AD54D18D80A5B00806ED5 /* LBSocial.mm */,
 				503AE0FC17EB989F00D1A890 /* main.m */,
 				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
-				978AD54D18D80A5B00806ED5 /* LBSocial.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -537,9 +541,10 @@
 			isa = PBXGroup;
 			children = (
 				97D387F818D072A80087853C /* IRandom.h */,
+				9763853B18E049B7000B2252 /* LBFileUtils.h */,
+				978AD54518D80A2300806ED5 /* LBSocial.h */,
 				97D387F918D072A80087853C /* RandomImpl.cpp */,
 				97D387FA18D072A80087853C /* RandomImpl.h */,
-				978AD54518D80A2300806ED5 /* LBSocial.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */,
+				9763853E18E04A1E000B2252 /* LBFileUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

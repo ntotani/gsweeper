@@ -1,4 +1,5 @@
 #include "AppDelegate.h"
+#include "Common/LBFileUtils.h"
 #include "Scene/Title/TitleScene.h"
 
 USING_NS_CC;
@@ -53,12 +54,25 @@ void AppDelegate::applicationWillEnterForeground() {
     // SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }
 
-void AppDelegate::screenShot(const char* fileName) {
+static CustomCommand saveToFileCommand;
+
+void AppDelegate::screenShot(const char* fileName, std::function<void(std::string)> callback) {
     auto s = Director::getInstance()->getVisibleSize();
     auto texture = RenderTexture::create(s.width, s.height);
     texture->setPosition(Point(s.width * 0.5f, s.height * 0.5f));
     texture->begin();
     Director::getInstance()->getRunningScene()->visit();
     texture->end();
-    texture->saveToFile(fileName, Image::Format::JPG);
+    std::string fullpath = LBFileUtils::getCachePath() + fileName;
+    saveToFileCommand.init(texture->getGlobalZOrder());
+    saveToFileCommand.func = [texture, fullpath, callback]() {
+        Image *image = texture->newImage(true);
+        if (image)
+        {
+            image->saveToFile(fullpath.c_str(), true);
+        }
+        CC_SAFE_DELETE(image);
+        callback(fullpath);
+    };
+    Director::getInstance()->getRenderer()->addCommand(&saveToFileCommand);
 }

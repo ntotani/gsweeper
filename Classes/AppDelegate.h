@@ -33,7 +33,7 @@ public:
     */
     virtual void applicationWillEnterForeground() override;
     
-    static void screenShot(const char* fileName);
+    static void screenShot(const char* fileName, std::function<void(std::string)> callback);
 };
 
 #endif // _APP_DELEGATE_H_

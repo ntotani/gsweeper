@@ -178,4 +178,8 @@ public class Cocos2dxActivity extends NativeActivity{
         }
     }
 
+	public static String getCachePath() {
+		return that.getCacheDir().getAbsolutePath();
+	}
+
 }
