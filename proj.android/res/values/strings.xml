@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">leadblow</string>
     <string name="app_id">273175146178099</string>
+    <string name="title_activity_facebook">投稿する</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_post">投稿</string>
+
 </resources>
