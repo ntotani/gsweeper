@@ -3,6 +3,7 @@ package org.cocos2dx.cpp;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import jp.co.septeni.original.leadblow.FacebookActivity;
 import android.app.NativeActivity;
 import android.content.ComponentName;
 import android.content.ContentValues;
@@ -14,7 +15,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
+import android.widget.Toast;
 
+import com.facebook.FacebookException;
 import com.facebook.LoggingBehavior;
 import com.facebook.Request;
 import com.facebook.Response;
@@ -23,12 +26,13 @@ import com.facebook.Session.NewPermissionsRequest;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.Settings;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
 
 public class Cocos2dxActivity extends NativeActivity{
 
 	private static Cocos2dxActivity that = null;
 	private static final String PERMISSION = "publish_actions";
-	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,44 +115,30 @@ public class Cocos2dxActivity extends NativeActivity{
 	}
 	
 	public static void facebook(String message, String filePath) {
-		that.tryPost(new File(filePath), message);
+		that.tryPost(filePath, message);
 	}
 
-	private void tryPost(File file, String message) {
+	private void tryPost(String filePath, String message) {
 		Session session = Session.getActiveSession();
 		if (session.isOpened()) {
 			if (session.getPermissions().contains(PERMISSION)) {
-				uploadPhoto(session, file, message);
+				showPostActivity(message, filePath);
 			} else {
-				requestPermission(session, file, message);
+				requestPermission(session, filePath, message);
 			}
 		} else {
-			login(session, file, message);
+			login(session, filePath, message);
 		}
 	}
 
-	private void uploadPhoto(Session session, File file, String message) {
-		try {
-			final Request request = Request.newUploadPhotoRequest(session,
-					file, new Request.Callback() {
-						@Override
-						public void onCompleted(Response response) {
-							// toast?
-						}
-					});
-			request.getParameters().putString("message", message);
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-					request.executeAsync();
-				}
-			});
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	private void showPostActivity(String message, String filePath) {
+		Intent intent = new Intent(that, FacebookActivity.class);
+		intent.putExtra("message", message);
+		intent.putExtra("filePath", filePath);
+		that.startActivity(intent);
 	}
 
-	private void requestPermission(Session session, final File file,
+	private void requestPermission(Session session, final String filePath,
 			final String message) {
 		session.requestNewPublishPermissions(new NewPermissionsRequest(this,
 				PERMISSION).setCallback(new StatusCallback() {
@@ -156,18 +146,18 @@ public class Cocos2dxActivity extends NativeActivity{
 			public void call(Session session, SessionState state,
 					Exception exception) {
 				if (state == SessionState.OPENED_TOKEN_UPDATED) {
-					tryPost(file, message);
+					tryPost(filePath, message);
 				}
 			}
 		}));
 	}
 
-	private void login(Session session, final File file, final String message) {
+	private void login(Session session, final String filePath, final String message) {
 		StatusCallback callback = new StatusCallback() {
 			@Override
 			public void call(Session session, SessionState state, Exception exception) {
 				if (state == SessionState.OPENED) {
-					tryPost(file, message);
+					tryPost(filePath, message);
 				}
 			}
 		};
