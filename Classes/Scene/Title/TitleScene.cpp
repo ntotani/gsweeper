@@ -39,8 +39,10 @@ bool TitleScene::init()
 }
 
 void TitleScene::onTouchEnded(Touch* touch, Event* event) {
+    /*
     AppDelegate::screenShot("screenshot.jpg", [](std::string ss) {
         //LBSocial::tweet("Hello LeadBlow", ss.c_str());
         LBSocial::facebook("Hello LeadBlow", ss.c_str());
     });
+     */
 }
