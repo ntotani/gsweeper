@@ -38,7 +38,6 @@ public class Cocos2dxActivity extends NativeActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		that = this;
-		handler = new Handler();
 
 		Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         Session session = Session.getActiveSession();
@@ -171,5 +170,11 @@ public class Cocos2dxActivity extends NativeActivity{
 	public static String getCachePath() {
 		return that.getCacheDir().getAbsolutePath();
 	}
+
+	public static void purchase(String productID) {
+		onPurchase("hoge" + productID);
+	}
+
+	public static native void onPurchase(String result);
 
 }
