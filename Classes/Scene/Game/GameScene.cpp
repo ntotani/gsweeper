@@ -41,13 +41,14 @@ bool GameScene::init()
     mineNum = MINE_NUM_INIT;
     score = 0;
 
-    scoreLabel = LabelTTF::create("", "", 48);
+    scoreLabel = LabelTTF::create("SCORE: 0", "Arial", 48);
     scoreLabel->setColor(Color3B(0, 0, 0));
     adjustScoreLabel();
     addChild(scoreLabel);
     dropBtn = AppDelegate::createButton("button_primary.png", "DROP");
     adjustDropBtn();
     dropBtn->setOpacity(0);
+    dropBtn->setVisible(false);
     dropBtn->addTouchEventListener(this, toucheventselector(GameScene::onDropButtonTouch));
     addChild(dropBtn);
     resetTiles();
@@ -110,6 +111,7 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
             sprites[p.y][p.x]->setTexture("bomb.png");
             CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("se_ob.mp3");
             dropBtn->setOpacity(0);
+            dropBtn->setVisible(false);
             auto topBtn = AppDelegate::createButton("button_default.png", "TOP");
             topBtn->setTitleColor(Color3B(0, 0, 0));
             topBtn->addTouchEventListener(this, toucheventselector(GameScene::onTopButtonTouch));
@@ -129,6 +131,7 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
             parseTile(p.y, p.x);
             adjustScoreLabel();
             if (dropBtn->getOpacity() == 0) {
+                dropBtn->setVisible(true);
                 dropBtn->runAction(FadeIn::create(0.5f));
             }
             if (openCount >= row * col - mineNum) {
@@ -141,6 +144,7 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
                     }
                 }
                 dropBtn->runAction(Sequence::create(FadeOut::create(duration), CallFunc::create([this]() {
+                    dropBtn->setVisible(false);
                     adjustDropBtn();
                 }), NULL));
                 float oldRate = 1.0f * mineNum / (row * col);
@@ -235,7 +239,7 @@ void GameScene::adjustScoreLabel()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
-    scoreLabel->setString(StringUtils::format("SCORE:%d", score));
+    scoreLabel->setString(StringUtils::format("SCORE: %d", score));
     scoreLabel->setPosition(Point(scoreLabel->getContentSize().width / 2, visibleSize.height - scoreLabel->getContentSize().height / 2) + Point(10, -10) + origin);
 }
 
