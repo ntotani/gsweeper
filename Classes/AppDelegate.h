@@ -2,6 +2,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "UIButton.h"
 
 /**
 @brief    The cocos2d Application.
@@ -34,6 +35,7 @@ public:
     virtual void applicationWillEnterForeground() override;
     
     static void screenShot(const char* fileName, std::function<void(std::string)> callback);
+    static cocos2d::ui::Button* createButton(const char* img, const char* txt);
 };
 
 #endif // _APP_DELEGATE_H_

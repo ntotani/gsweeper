@@ -1,9 +1,9 @@
 #include "TitleScene.h"
-#include "../../Common/LBSocial.h"
+#include "../Game/GameScene.h"
 #include "AppDelegate.h"
-#include "../../Common/LBFileUtils.h"
 
 USING_NS_CC;
+using namespace ui;
 
 Scene* TitleScene::createScene()
 {
@@ -22,27 +22,35 @@ bool TitleScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
-    auto label = LabelTTF::create("Hello leadblow", "Arial", 24);
+    auto label = LabelTTF::create("Greedy Sweeper", "Arial", 64);
+    label->setColor(Color3B(0, 0, 0));
     label->setPosition(Point(origin.x + visibleSize.width/2,
                              origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+    this->addChild(label);
 
-    auto dispatcher = Director::getInstance()->getEventDispatcher();
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [](Touch* touch, Event* event) { return true; };
-    listener->onTouchMoved = [](Touch* touch, Event* event) {};
-    listener->onTouchEnded = CC_CALLBACK_2(TitleScene::onTouchEnded, this);
-    listener->onTouchCancelled = [](Touch* touch, Event* event) {};
-    dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    auto tutorial = Sprite::create("tutorial.png");
+    tutorial->setPosition(Point(visibleSize) / 2 + origin);
+    addChild(tutorial);
+
+    auto startButton = AppDelegate::createButton("button_primary.png", "START");
+    startButton->setPosition(tutorial->getPosition() + Point(0, -300));
+    startButton->addTouchEventListener(this, toucheventselector(TitleScene::onStartButtonTouch));
+    addChild(startButton);
+
+    int highScore = UserDefault::getInstance()->getIntegerForKey("highScore", -1);
+    if (highScore > 0) {
+        auto scoreLabel = LabelTTF::create(StringUtils::format("HIGH SCORE: %d", highScore), "Arial", 48);
+        scoreLabel->setColor(Color3B(0, 0, 0));
+        scoreLabel->setPosition(label->getPosition() + Point(0, -label->getContentSize().height));
+        addChild(scoreLabel);
+    }
 
     return true;
 }
 
-void TitleScene::onTouchEnded(Touch* touch, Event* event) {
-    /*
-    AppDelegate::screenShot("screenshot.jpg", [](std::string ss) {
-        //LBSocial::tweet("Hello LeadBlow", ss.c_str());
-        LBSocial::facebook("Hello LeadBlow", ss.c_str());
-    });
-     */
+void TitleScene::onStartButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type == TouchEventType::TOUCH_EVENT_ENDED) {
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(), Color3B(255, 255, 255)));
+    }
 }

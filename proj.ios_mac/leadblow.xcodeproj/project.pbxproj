@@ -70,6 +70,28 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		C67470C618E45D2600D1F405 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B218E45D2600D1F405 /* block.png */; };
+		C67470C718E45D2600D1F405 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B318E45D2600D1F405 /* bomb.png */; };
+		C67470C818E45D2600D1F405 /* button_danger.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B418E45D2600D1F405 /* button_danger.png */; };
+		C67470C918E45D2600D1F405 /* button_default.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B518E45D2600D1F405 /* button_default.png */; };
+		C67470CA18E45D2600D1F405 /* button_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B618E45D2600D1F405 /* button_facebook.png */; };
+		C67470CB18E45D2600D1F405 /* button_primary.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B718E45D2600D1F405 /* button_primary.png */; };
+		C67470CC18E45D2600D1F405 /* button_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B818E45D2600D1F405 /* button_twitter.png */; };
+		C67470CD18E45D2600D1F405 /* num_0.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470B918E45D2600D1F405 /* num_0.png */; };
+		C67470CE18E45D2600D1F405 /* num_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BA18E45D2600D1F405 /* num_1.png */; };
+		C67470CF18E45D2600D1F405 /* num_2.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BB18E45D2600D1F405 /* num_2.png */; };
+		C67470D018E45D2600D1F405 /* num_3.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BC18E45D2600D1F405 /* num_3.png */; };
+		C67470D118E45D2600D1F405 /* num_4.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BD18E45D2600D1F405 /* num_4.png */; };
+		C67470D218E45D2600D1F405 /* num_5.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BE18E45D2600D1F405 /* num_5.png */; };
+		C67470D318E45D2600D1F405 /* num_6.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470BF18E45D2600D1F405 /* num_6.png */; };
+		C67470D418E45D2600D1F405 /* num_7.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470C018E45D2600D1F405 /* num_7.png */; };
+		C67470D518E45D2600D1F405 /* num_8.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470C118E45D2600D1F405 /* num_8.png */; };
+		C67470D618E45D2600D1F405 /* num_9.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470C218E45D2600D1F405 /* num_9.png */; };
+		C67470D718E45D2600D1F405 /* se_coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C67470C318E45D2600D1F405 /* se_coin.mp3 */; };
+		C67470D818E45D2600D1F405 /* se_ob.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C67470C418E45D2600D1F405 /* se_ob.mp3 */; };
+		C67470D918E45D2600D1F405 /* tutorial.png in Resources */ = {isa = PBXBuildFile; fileRef = C67470C518E45D2600D1F405 /* tutorial.png */; };
+		C67470DE18E45D8200D1F405 /* ResultScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67470DC18E45D8200D1F405 /* ResultScene.cpp */; };
+		C67470E118E45D9000D1F405 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67470DF18E45D9000D1F405 /* GameScene.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -290,6 +312,30 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C67470B218E45D2600D1F405 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = block.png; path = ../../cocos_games/gsweeper/Resources/block.png; sourceTree = "<group>"; };
+		C67470B318E45D2600D1F405 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bomb.png; path = ../../cocos_games/gsweeper/Resources/bomb.png; sourceTree = "<group>"; };
+		C67470B418E45D2600D1F405 /* button_danger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_danger.png; path = ../../cocos_games/gsweeper/Resources/button_danger.png; sourceTree = "<group>"; };
+		C67470B518E45D2600D1F405 /* button_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_default.png; path = ../../cocos_games/gsweeper/Resources/button_default.png; sourceTree = "<group>"; };
+		C67470B618E45D2600D1F405 /* button_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_facebook.png; path = ../../cocos_games/gsweeper/Resources/button_facebook.png; sourceTree = "<group>"; };
+		C67470B718E45D2600D1F405 /* button_primary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_primary.png; path = ../../cocos_games/gsweeper/Resources/button_primary.png; sourceTree = "<group>"; };
+		C67470B818E45D2600D1F405 /* button_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_twitter.png; path = ../../cocos_games/gsweeper/Resources/button_twitter.png; sourceTree = "<group>"; };
+		C67470B918E45D2600D1F405 /* num_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_0.png; path = ../../cocos_games/gsweeper/Resources/num_0.png; sourceTree = "<group>"; };
+		C67470BA18E45D2600D1F405 /* num_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_1.png; path = ../../cocos_games/gsweeper/Resources/num_1.png; sourceTree = "<group>"; };
+		C67470BB18E45D2600D1F405 /* num_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_2.png; path = ../../cocos_games/gsweeper/Resources/num_2.png; sourceTree = "<group>"; };
+		C67470BC18E45D2600D1F405 /* num_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_3.png; path = ../../cocos_games/gsweeper/Resources/num_3.png; sourceTree = "<group>"; };
+		C67470BD18E45D2600D1F405 /* num_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_4.png; path = ../../cocos_games/gsweeper/Resources/num_4.png; sourceTree = "<group>"; };
+		C67470BE18E45D2600D1F405 /* num_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_5.png; path = ../../cocos_games/gsweeper/Resources/num_5.png; sourceTree = "<group>"; };
+		C67470BF18E45D2600D1F405 /* num_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_6.png; path = ../../cocos_games/gsweeper/Resources/num_6.png; sourceTree = "<group>"; };
+		C67470C018E45D2600D1F405 /* num_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_7.png; path = ../../cocos_games/gsweeper/Resources/num_7.png; sourceTree = "<group>"; };
+		C67470C118E45D2600D1F405 /* num_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_8.png; path = ../../cocos_games/gsweeper/Resources/num_8.png; sourceTree = "<group>"; };
+		C67470C218E45D2600D1F405 /* num_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = num_9.png; path = ../../cocos_games/gsweeper/Resources/num_9.png; sourceTree = "<group>"; };
+		C67470C318E45D2600D1F405 /* se_coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se_coin.mp3; path = ../../cocos_games/gsweeper/Resources/se_coin.mp3; sourceTree = "<group>"; };
+		C67470C418E45D2600D1F405 /* se_ob.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se_ob.mp3; path = ../../cocos_games/gsweeper/Resources/se_ob.mp3; sourceTree = "<group>"; };
+		C67470C518E45D2600D1F405 /* tutorial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial.png; path = ../../cocos_games/gsweeper/Resources/tutorial.png; sourceTree = "<group>"; };
+		C67470DC18E45D8200D1F405 /* ResultScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultScene.cpp; sourceTree = "<group>"; };
+		C67470DD18E45D8200D1F405 /* ResultScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultScene.h; sourceTree = "<group>"; };
+		C67470DF18E45D9000D1F405 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
+		C67470E018E45D9000D1F405 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -499,6 +545,26 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C67470B218E45D2600D1F405 /* block.png */,
+				C67470B318E45D2600D1F405 /* bomb.png */,
+				C67470B418E45D2600D1F405 /* button_danger.png */,
+				C67470B518E45D2600D1F405 /* button_default.png */,
+				C67470B618E45D2600D1F405 /* button_facebook.png */,
+				C67470B718E45D2600D1F405 /* button_primary.png */,
+				C67470B818E45D2600D1F405 /* button_twitter.png */,
+				C67470B918E45D2600D1F405 /* num_0.png */,
+				C67470BA18E45D2600D1F405 /* num_1.png */,
+				C67470BB18E45D2600D1F405 /* num_2.png */,
+				C67470BC18E45D2600D1F405 /* num_3.png */,
+				C67470BD18E45D2600D1F405 /* num_4.png */,
+				C67470BE18E45D2600D1F405 /* num_5.png */,
+				C67470BF18E45D2600D1F405 /* num_6.png */,
+				C67470C018E45D2600D1F405 /* num_7.png */,
+				C67470C118E45D2600D1F405 /* num_8.png */,
+				C67470C218E45D2600D1F405 /* num_9.png */,
+				C67470C318E45D2600D1F405 /* se_coin.mp3 */,
+				C67470C418E45D2600D1F405 /* se_ob.mp3 */,
+				C67470C518E45D2600D1F405 /* tutorial.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -507,6 +573,8 @@
 		97366E2318D06B5800314E1C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				C67470DA18E45D4F00D1F405 /* Game */,
+				C67470DB18E45D5500D1F405 /* Result */,
 				97366E2A18D06B7D00314E1C /* Title */,
 			);
 			name = Scene;
@@ -562,6 +630,24 @@
 				97D3880218D073560087853C /* RandomTests.mm */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		C67470DA18E45D4F00D1F405 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				C67470DF18E45D9000D1F405 /* GameScene.cpp */,
+				C67470E018E45D9000D1F405 /* GameScene.h */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		C67470DB18E45D5500D1F405 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				C67470DC18E45D8200D1F405 /* ResultScene.cpp */,
+				C67470DD18E45D8200D1F405 /* ResultScene.h */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -638,7 +724,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 6B7989SAHJ;
+						DevelopmentTeam = ZCSDM2RHP9;
 					};
 					97D387DC18D071920087853C = {
 						TestTargetID = 1D6058900D05DD3D006BFB54;
@@ -752,20 +838,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				C67470CA18E45D2600D1F405 /* button_facebook.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				C67470D618E45D2600D1F405 /* num_9.png in Resources */,
+				C67470D518E45D2600D1F405 /* num_8.png in Resources */,
+				C67470CD18E45D2600D1F405 /* num_0.png in Resources */,
+				C67470C818E45D2600D1F405 /* button_danger.png in Resources */,
+				C67470CF18E45D2600D1F405 /* num_2.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				C67470CC18E45D2600D1F405 /* button_twitter.png in Resources */,
+				C67470C918E45D2600D1F405 /* button_default.png in Resources */,
+				C67470C618E45D2600D1F405 /* block.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				C67470D118E45D2600D1F405 /* num_4.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				C67470D718E45D2600D1F405 /* se_coin.mp3 in Resources */,
+				C67470D418E45D2600D1F405 /* num_7.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				C67470C718E45D2600D1F405 /* bomb.png in Resources */,
+				C67470D018E45D2600D1F405 /* num_3.png in Resources */,
+				C67470D218E45D2600D1F405 /* num_5.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				C67470CB18E45D2600D1F405 /* button_primary.png in Resources */,
+				C67470D918E45D2600D1F405 /* tutorial.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				C67470CE18E45D2600D1F405 /* num_1.png in Resources */,
+				C67470D318E45D2600D1F405 /* num_6.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				C67470D818E45D2600D1F405 /* se_ob.mp3 in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,12 +900,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				97D387FB18D072A80087853C /* RandomImpl.cpp in Sources */,
+				C67470DE18E45D8200D1F405 /* ResultScene.cpp in Sources */,
 				9796BCE918E409D40018A9A4 /* Purchase.mm in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				978AD54E18D80A5B00806ED5 /* LBSocial.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				C67470E118E45D9000D1F405 /* GameScene.cpp in Sources */,
 				97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */,
 				9763853E18E04A1E000B2252 /* LBFileUtils.mm in Sources */,
 			);
@@ -1160,7 +1268,7 @@
 					"$(SRCROOT)/../cocos2d/cocos/physics",
 					"$(SRCROOT)/../cocos2d/cocos/math/kazmath",
 					"$(SRCROOT)/../cocos2d/cocos/2d",
-					"$(SRCROOT)/../cocos2d/cocos/gui",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
 					"$(SRCROOT)/../cocos2d/cocos/network",
 					"$(SRCROOT)/../cocos2d/cocos/audio/include",
 					"$(SRCROOT)/../cocos2d/cocos/editor-support",
@@ -1189,7 +1297,7 @@
 					"$(SRCROOT)/../cocos2d/cocos/physics",
 					"$(SRCROOT)/../cocos2d/cocos/math/kazmath",
 					"$(SRCROOT)/../cocos2d/cocos/2d",
-					"$(SRCROOT)/../cocos2d/cocos/gui",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
 					"$(SRCROOT)/../cocos2d/cocos/network",
 					"$(SRCROOT)/../cocos2d/cocos/audio/include",
 					"$(SRCROOT)/../cocos2d/cocos/editor-support",

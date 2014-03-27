@@ -20,6 +20,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glView = GLView::create("leadblow");
         director->setOpenGLView(glView);
     }
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 #ifdef COCOS2D_DEBUG
     // turn on display FPS
@@ -75,4 +76,15 @@ void AppDelegate::screenShot(const char* fileName, std::function<void(std::strin
         callback(fullpath);
     };
     Director::getInstance()->getRenderer()->addCommand(&saveToFileCommand);
+}
+
+cocos2d::ui::Button* AppDelegate::createButton(const char* img, const char* txt)
+{
+    auto button = cocos2d::ui::Button::create();
+    button->loadTextureNormal(img, cocos2d::ui::TextureResType::UI_TEX_TYPE_LOCAL);
+    button->setTitleText(txt);
+    button->setTitleFontSize(48);
+    button->setTouchEnabled(true);
+    button->setPressedActionEnabled(true);
+    return button;
 }
