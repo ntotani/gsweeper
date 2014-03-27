@@ -1,9 +1,15 @@
 package org.cocos2dx.cpp;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
+import jp.co.septeni.original.leadblow.BuildConfig;
 import jp.co.septeni.original.leadblow.FacebookActivity;
+import jp.co.septeni.original.leadblow.R;
+import jp.co.septeni.original.leadblow.billing.IabHelper;
+import jp.co.septeni.original.leadblow.billing.IabHelper.OnIabPurchaseFinishedListener;
+import jp.co.septeni.original.leadblow.billing.Purchase;
+import jp.co.septeni.original.leadblow.billing.IabHelper.OnIabSetupFinishedListener;
+import jp.co.septeni.original.leadblow.billing.IabResult;
 import android.app.NativeActivity;
 import android.content.ComponentName;
 import android.content.ContentValues;
@@ -12,27 +18,23 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.facebook.FacebookException;
 import com.facebook.LoggingBehavior;
-import com.facebook.Request;
-import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.Session.NewPermissionsRequest;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.Settings;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
 
 public class Cocos2dxActivity extends NativeActivity{
 
 	private static Cocos2dxActivity that = null;
 	private static final String PERMISSION = "publish_actions";
+	private IabHelper iabHelper;
+	public static int IAB_REQUEST_CODE = 10001;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,20 @@ public class Cocos2dxActivity extends NativeActivity{
             }
             Session.setActiveSession(session);
         }
+
+        String base64PublicKey = getString(R.string.iab_key);
+        iabHelper = new IabHelper(this, base64PublicKey);
+		if (BuildConfig.DEBUG) {
+			iabHelper.enableDebugLogging(true);
+		}
+        iabHelper.startSetup(new OnIabSetupFinishedListener() {
+			@Override
+			public void onIabSetupFinished(IabResult result) {
+				if (result.isFailure()) {
+					Log.d("", result.getMessage());
+				}
+			}
+		});
 
 		//For supports translucency
 		
@@ -70,12 +86,16 @@ public class Cocos2dxActivity extends NativeActivity{
 		// getWindow().setFormat(PixelFormat.TRANSLUCENT);
 		
 	}
-	
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
-    }
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (iabHelper.handleActivityResult(requestCode, resultCode, data)) {
+			return;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(this, requestCode,
+				resultCode, data);
+	}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -172,9 +192,21 @@ public class Cocos2dxActivity extends NativeActivity{
 	}
 
 	public static void purchase(String productID) {
-		onPurchase("hoge" + productID);
+		that.launchPurchaseFlow(productID);
 	}
 
 	public static native void onPurchase(String result);
+
+	private void launchPurchaseFlow(String sku) {
+		iabHelper.launchPurchaseFlow(this, sku, IAB_REQUEST_CODE, new OnIabPurchaseFinishedListener() {
+			@Override
+			public void onIabPurchaseFinished(IabResult result, Purchase info) {
+				if (result.isSuccess()) {
+					iabHelper.consumeAsync(info, null);
+				}
+				onPurchase(result.getMessage());
+			}
+		});
+	}
 
 }

@@ -6,5 +6,6 @@
     <string name="title_activity_facebook">Facebook</string>
     <string name="action_post">POST</string>
     <string name="image_desc">img</string>
+    <string name="iab_key">hogehoge</string>
 
 </resources>
