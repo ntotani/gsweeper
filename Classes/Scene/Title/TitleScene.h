@@ -13,7 +13,8 @@ public:
     static Scene* createScene();
     virtual bool init();
     CREATE_FUNC(TitleScene);
-    void onStartButtonTouch(Object* target, TouchEventType type);
+    void onStartButtonTouch(Ref* target, TouchEventType type);
+    void onMultiButtonTouch(Ref* target, TouchEventType type);
 };
 
 #endif /* defined(__puzzlegirl__TitleScene__) */

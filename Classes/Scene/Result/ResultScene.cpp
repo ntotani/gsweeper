@@ -5,15 +5,25 @@
 USING_NS_CC;
 using namespace ui;
 
-Scene* ResultScene::createScene()
+Scene* ResultScene::createScene(std::vector<int> scores)
 {
     auto scene = Scene::create();
-    auto layer = ResultScene::create();
-    scene->addChild(layer);
+    ResultScene *pRet = new ResultScene();
+    if (pRet && pRet->initWithScores(scores))
+    {
+        pRet->autorelease();
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+    scene->addChild(pRet);
     return scene;
 }
 
-bool ResultScene::init()
+bool ResultScene::initWithScores(std::vector<int> scores)
 {
     if ( !Layer::init() )
     {
@@ -23,16 +33,17 @@ bool ResultScene::init()
     Point origin = Director::getInstance()->getVisibleOrigin();
 
     auto ud = UserDefault::getInstance();
-    int score = ud->getIntegerForKey("lastScore");
     int highScore = ud->getIntegerForKey("highScore");
 
-    auto scoreLabel = LabelTTF::create(StringUtils::format("SCORE: %d", score), "Arial", 48);
-    scoreLabel->setColor(Color3B(0, 0, 0));
-    scoreLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2) + origin);
-    addChild(scoreLabel);
+    for (int i=0; i<scores.size(); i++) {
+        auto scoreLabel = LabelTTF::create(StringUtils::format("SCORE: %d", scores[i]), "Arial", 48);
+        scoreLabel->setColor(Color3B(0, 0, 0));
+        scoreLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scoreLabel->getContentSize().height * i) + origin);
+        addChild(scoreLabel);
+    }
 
     auto tweetButton = AppDelegate::createButton("button_twitter.png", "");
-    tweetButton->setPosition(scoreLabel->getPosition() + Point(0, -scoreLabel->getContentSize().height) + origin);
+    tweetButton->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scores.size() * 48) + origin);
     addChild(tweetButton);
 
     auto facebookButton = AppDelegate::createButton("button_facebook.png", "");

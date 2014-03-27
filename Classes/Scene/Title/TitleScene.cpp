@@ -43,6 +43,11 @@ bool TitleScene::init()
         scoreLabel->setColor(Color3B(0, 0, 0));
         scoreLabel->setPosition(label->getPosition() + Point(0, -label->getContentSize().height));
         addChild(scoreLabel);
+        
+        auto multiButton = AppDelegate::createButton("button_primary.png", "MULTI");
+        multiButton->setPosition(startButton->getPosition() + Point(0, -72));
+        multiButton->addTouchEventListener(this, toucheventselector(TitleScene::onMultiButtonTouch));
+        addChild(multiButton);
     }
 
     return true;
@@ -51,6 +56,13 @@ bool TitleScene::init()
 void TitleScene::onStartButtonTouch(Ref* target, TouchEventType type)
 {
     if (type == TouchEventType::TOUCH_EVENT_ENDED) {
-        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(), Color3B(255, 255, 255)));
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(1), Color3B(255, 255, 255)));
+    }
+}
+
+void TitleScene::onMultiButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type == TouchEventType::TOUCH_EVENT_ENDED) {
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(2), Color3B(255, 255, 255)));
     }
 }

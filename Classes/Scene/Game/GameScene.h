@@ -12,19 +12,19 @@ enum TILE {
     HIDE = 0,
     SHOWN,
     BOMB,
+    SHOWN_BOMB
 };
 
 class GameScene : public Layer
 {
 public:
-    static Scene* createScene();
-    virtual bool init();
-    CREATE_FUNC(GameScene);
+    static Scene* createScene(int playerNum);
+    virtual bool initWithPlayerNum(int playerNum);
     void onTouchEnded(Touch* touch, Event* event);
     vector< pair<int, int> > ROUND;
-    void onDropButtonTouch(Object* target, TouchEventType type);
-    void onRetryButtonTouch(Object* target, TouchEventType type);
-    void onTopButtonTouch(Object* target, TouchEventType type);
+    void onDropButtonTouch(Ref* target, TouchEventType type);
+    void onRetryButtonTouch(Ref* target, TouchEventType type);
+    void onTopButtonTouch(Ref* target, TouchEventType type);
 private:
     int row;
     int col;
@@ -32,17 +32,20 @@ private:
     vector< vector<TILE> > tiles;
     vector< vector<Sprite*> > sprites;
     int openCount;
-    int score;
-    LabelTTF* scoreLabel;
     Button* dropBtn;
+    vector<int> scores;
+    vector<LabelTTF*> scoreLabels;
+    vector<bool> droped;
+    int currentTurn;
 
     void resetTiles();
     int countMine(int i, int j) const;
     bool outObBounds(int i, int j) const;
     void parseTile(int i, int j);
     void adjustScoreLabel();
-    Node* createInfoNode() const;
     void adjustDropBtn();
+    void stepTurn();
+    bool dropedAll();
 };
 
 #endif // __GAME_SCENE_H__

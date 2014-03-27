@@ -14,15 +14,25 @@ using namespace ui;
 #define ROW_LIMIT 15
 #define MINE_NUM_LIMIT 30
 
-Scene* GameScene::createScene()
+Scene* GameScene::createScene(int playerNum)
 {
     auto scene = Scene::create();
-    auto layer = GameScene::create();
-    scene->addChild(layer);
+    GameScene *pRet = new GameScene();
+    if (pRet && pRet->initWithPlayerNum(playerNum))
+    {
+        pRet->autorelease();
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+    scene->addChild(pRet);
     return scene;
 }
 
-bool GameScene::init()
+bool GameScene::initWithPlayerNum(int playerNum)
 {
     if ( !Layer::init() )
     {
@@ -39,12 +49,16 @@ bool GameScene::init()
     row = ROW_INIT;
     col = COL_INIT;
     mineNum = MINE_NUM_INIT;
-    score = 0;
-
-    scoreLabel = LabelTTF::create("SCORE: 0", "Arial", 48);
-    scoreLabel->setColor(Color3B(0, 0, 0));
+    currentTurn = 0;
+    for (int i=0; i<playerNum; i++) {
+        scores.push_back(0);
+        droped.push_back(false);
+        auto scoreLabel = LabelTTF::create("SCORE: 0", "Arial", 48);
+        scoreLabel->setColor(Color3B(0, 0, 0));
+        addChild(scoreLabel);
+        scoreLabels.push_back(scoreLabel);
+    }
     adjustScoreLabel();
-    addChild(scoreLabel);
     dropBtn = AppDelegate::createButton("button_primary.png", "DROP");
     adjustDropBtn();
     dropBtn->setOpacity(0);
@@ -69,18 +83,20 @@ bool GameScene::init()
 
 void GameScene::onDropButtonTouch(Ref* target, TouchEventType type)
 {
-    if (dropBtn->getOpacity() < 1) {
+    if (dropBtn->getOpacity() < 1 || type != TouchEventType::TOUCH_EVENT_ENDED) {
         return;
     }
-    if (type == TouchEventType::TOUCH_EVENT_ENDED) {
-        auto ud = UserDefault::getInstance();
-        ud->setIntegerForKey("lastScore", score);
-        int highScore = ud->getIntegerForKey("highScore", -1);
-        if (score > highScore) {
-            ud->setIntegerForKey("highScore", score);
-        }
+    droped[currentTurn] = true;
+    auto ud = UserDefault::getInstance();
+    int highScore = ud->getIntegerForKey("highScore", -1);
+    if (scores[currentTurn] > highScore) {
+        ud->setIntegerForKey("highScore", scores[currentTurn]);
         ud->flush();
-        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(), Color3B(255, 255, 255)));
+    }
+    if (dropedAll()) {
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
+    } else {
+        stepTurn();
     }
 }
 
@@ -89,7 +105,7 @@ void GameScene::onRetryButtonTouch(Ref* target, TouchEventType type)
     if (type != TouchEventType::TOUCH_EVENT_ENDED) {
         return;
     }
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(), Color3B(255, 255, 255)));
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene((int)scores.size()), Color3B(255, 255, 255)));
 }
 
 void GameScene::onTopButtonTouch(Ref* target, TouchEventType type)
@@ -108,24 +124,36 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
     p = (p - base) / TILE_LEN;
     if (!outObBounds(p.y, p.x) && sprites[p.y][p.x] && sprites[p.y][p.x]->getOpacity() == 255) {
         if (tiles[p.y][p.x] == TILE::BOMB) {
+            tiles[p.y][p.x] = TILE::SHOWN_BOMB;
             sprites[p.y][p.x]->setTexture("bomb.png");
             CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("se_ob.mp3");
-            dropBtn->setOpacity(0);
-            dropBtn->setVisible(false);
-            auto topBtn = AppDelegate::createButton("button_default.png", "TOP");
-            topBtn->setTitleColor(Color3B(0, 0, 0));
-            topBtn->addTouchEventListener(this, toucheventselector(GameScene::onTopButtonTouch));
-            auto retryBtn = AppDelegate::createButton("button_primary.png", "RETRY");
-            retryBtn->addTouchEventListener(this, toucheventselector(GameScene::onRetryButtonTouch));
-            float margin = (visibleSize.width - retryBtn->getContentSize().width - topBtn->getContentSize().width) / 3;
-            topBtn->setPosition(Point(margin + topBtn->getContentSize().width / 2, dropBtn->getPositionY()));
-            retryBtn->setPosition(Point(margin + topBtn->getContentSize().width + margin + retryBtn->getContentSize().width / 2, dropBtn->getPositionY()));
-            addChild(topBtn);
-            addChild(retryBtn);
-        } else {
+            scores[currentTurn] = 0;
+            droped[currentTurn] = true;
+            if (dropedAll()) {
+                if (scores.size() == 1) {
+                    dropBtn->setOpacity(0);
+                    dropBtn->setVisible(false);
+                    auto topBtn = AppDelegate::createButton("button_default.png", "TOP");
+                    topBtn->setTitleColor(Color3B(0, 0, 0));
+                    topBtn->addTouchEventListener(this, toucheventselector(GameScene::onTopButtonTouch));
+                    auto retryBtn = AppDelegate::createButton("button_primary.png", "RETRY");
+                    retryBtn->addTouchEventListener(this, toucheventselector(GameScene::onRetryButtonTouch));
+                    float margin = (visibleSize.width - retryBtn->getContentSize().width - topBtn->getContentSize().width) / 3;
+                    topBtn->setPosition(Point(margin + topBtn->getContentSize().width / 2, dropBtn->getPositionY()));
+                    retryBtn->setPosition(Point(margin + topBtn->getContentSize().width + margin + retryBtn->getContentSize().width / 2, dropBtn->getPositionY()));
+                    addChild(topBtn);
+                    addChild(retryBtn);
+                } else {
+                    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
+                }
+            } else {
+                adjustScoreLabel();
+                stepTurn();
+            }
+        } else if (tiles[p.y][p.x] == TILE::HIDE) {
             int mine = countMine(p.y, p.x);
-            if (mine > 0 && tiles[p.y][p.x] != SHOWN) {
-                score += mine;
+            if (mine > 0) {
+                scores[currentTurn] += mine;
                 CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("se_coin.mp3");
             }
             parseTile(p.y, p.x);
@@ -150,11 +178,11 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
                 float oldRate = 1.0f * mineNum / (row * col);
                 row = std::min(row + 1, ROW_LIMIT);
                 mineNum = std::min((int)(row * col * (oldRate + 0.01f)), MINE_NUM_LIMIT);
-                log("%d, %d, %d", row, col, mineNum);
                 runAction(Sequence::create(DelayTime::create(duration), CallFunc::create([this](){
                     resetTiles();
                 }), NULL));
             }
+            stepTurn();
         }
     }
 }
@@ -205,7 +233,7 @@ int GameScene::countMine(int i, int j) const
 {
     int num = 0;
     for (auto e : ROUND) {
-        if (!outObBounds(i + e.first, j + e.second) && tiles[i + e.first][j + e.second] == TILE::BOMB) {
+        if (!outObBounds(i + e.first, j + e.second) && (tiles[i + e.first][j + e.second] == BOMB || tiles[i + e.first][j + e.second] == SHOWN_BOMB)) {
             num++;
         }
     }
@@ -218,7 +246,7 @@ bool GameScene::outObBounds(int i, int j) const
 }
 
 void GameScene::parseTile(int i, int j) {
-    if (outObBounds(i, j) || tiles[i][j] == SHOWN) {
+    if (outObBounds(i, j) || tiles[i][j] == SHOWN || tiles[i][j] == SHOWN_BOMB) {
         return;
     }
     tiles[i][j] = TILE::SHOWN;
@@ -239,38 +267,15 @@ void GameScene::adjustScoreLabel()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
-    scoreLabel->setString(StringUtils::format("SCORE: %d", score));
-    scoreLabel->setPosition(Point(scoreLabel->getContentSize().width / 2, visibleSize.height - scoreLabel->getContentSize().height / 2) + Point(10, -10) + origin);
-}
-
-Node* GameScene::createInfoNode() const
-{
-    auto node = Node::create();
-    auto nextLabel = LabelTTF::create("NEXT", "", 48);
-    nextLabel->setColor(Color3B(0, 0, 0));
-    auto iconTile = Sprite::create("block.png");
-    iconTile->setPosition(0, -nextLabel->getContentSize().height);
-    auto tileNumLabel = LabelTTF::create(StringUtils::format("%d x %d", col, row), "", 48);
-    tileNumLabel->setColor(Color3B(0, 0, 0));
-    tileNumLabel->setPosition((iconTile->getContentSize().width + tileNumLabel->getContentSize().width) / 2 + 10, -nextLabel->getContentSize().height);
-    auto iconBomb = Sprite::create("bomb.png");
-    iconBomb->setPosition(0, iconTile->getPositionY() - iconTile->getContentSize().height - 10);
-    auto mineNumLabel = LabelTTF::create(StringUtils::format("%d", mineNum), "", 48);
-    mineNumLabel->setColor(Color3B(0, 0, 0));
-    mineNumLabel->setPosition((iconBomb->getContentSize().width + mineNumLabel->getContentSize().width) / 2 + 10, iconBomb->getPositionY());
-    node->addChild(nextLabel);
-    node->addChild(iconTile);
-    node->addChild(tileNumLabel);
-    node->addChild(iconBomb);
-    node->addChild(mineNumLabel);
-    /*
-    float width = nextLabel->getContentSize().width / 2 + tileNumLabel->getPositionX() + tileNumLabel->getContentSize().width / 2;
-    float height = nextLabel->getContentSize().height / 2 - iconBomb->getPositionY() + iconBomb->getContentSize().height / 2;
-    */
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
-    node->setPosition(Point(visibleSize) / 2 + origin);
-    return node;
+    for (int i=0; i<scores.size(); i++) {
+        if (scores.size() > 1) {
+            scoreLabels[i]->setString(StringUtils::format("%dP SCORE: %d", i + 1, scores[i]));
+        } else {
+            scoreLabels[i]->setString(StringUtils::format("SCORE: %d", scores[i]));
+        }
+        auto s = scoreLabels[i]->getContentSize();
+        scoreLabels[i]->setPosition(Point(visibleSize.width / 2, visibleSize.height - s.height / 2 - s.height * i) + Point(10, -10) + origin);
+    }
 }
 
 void GameScene::adjustDropBtn()
@@ -278,4 +283,26 @@ void GameScene::adjustDropBtn()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
     dropBtn->setPosition(Point(visibleSize.width / 2, (visibleSize.height - row * TILE_LEN) / 4.0f) + origin);
+}
+
+void GameScene::stepTurn()
+{
+    while (true) {
+        currentTurn = (currentTurn + 1) % scores.size();
+        if (!droped[currentTurn]) {
+            break;
+        }
+    }
+    for (int i=0; i<scoreLabels.size(); i++) {
+        scoreLabels[i]->runAction(ScaleTo::create(0.1f, i == currentTurn ? 1.1f : 0.9f));
+    }
+}
+
+bool GameScene::dropedAll()
+{
+    bool ret = true;
+    for (bool e : droped) {
+        ret &= e;
+    }
+    return ret;
 }

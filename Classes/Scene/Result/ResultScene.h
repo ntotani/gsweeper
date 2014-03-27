@@ -10,11 +10,13 @@ using namespace ui;
 class ResultScene : public Layer
 {
 public:
-    static Scene* createScene();
-    virtual bool init();
+    static Scene* createScene(std::vector<int> scores);
+    virtual bool initWithScores(std::vector<int> scores);
     CREATE_FUNC(ResultScene);
     void onTouchEnded(Touch* touch, Event* event);
-    void onOkButtonTouch(Object* target, TouchEventType type);
+    void onOkButtonTouch(Ref* target, TouchEventType type);
+private:
+    std::vector<int> scores;
 };
 
 #endif /* defined(__gsweeper__ResultScene__) */
