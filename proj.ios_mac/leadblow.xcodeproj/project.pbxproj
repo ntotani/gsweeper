@@ -65,6 +65,7 @@
 		9796BCF418E54C3A0018A9A4 /* GamePlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCF318E54C3A0018A9A4 /* GamePlatform.mm */; };
 		9796BCF718E553020018A9A4 /* GamePlatform_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCF618E553020018A9A4 /* GamePlatform_objc.m */; };
 		9796BCF918E55D460018A9A4 /* ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9796BCF818E55D460018A9A4 /* ids.plist */; };
+		9796BCFD18E56BD10018A9A4 /* Store.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCFC18E56BD10018A9A4 /* Store.mm */; };
 		97D387DF18D071920087853C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D387DE18D071920087853C /* XCTest.framework */; };
 		97D387E018D071920087853C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		97D387E118D071920087853C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -291,6 +292,8 @@
 		9796BCF518E553020018A9A4 /* GamePlatform_objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlatform_objc.h; sourceTree = "<group>"; };
 		9796BCF618E553020018A9A4 /* GamePlatform_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePlatform_objc.m; sourceTree = "<group>"; };
 		9796BCF818E55D460018A9A4 /* ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ids.plist; sourceTree = "<group>"; };
+		9796BCFA18E56B9F0018A9A4 /* Store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Store.h; path = ../../Classes/Common/Store.h; sourceTree = "<group>"; };
+		9796BCFC18E56BD10018A9A4 /* Store.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Store.mm; sourceTree = "<group>"; };
 		97D387DD18D071920087853C /* leadblow iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "leadblow iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D387DE18D071920087853C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		97D387E418D071920087853C /* leadblow iOS Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "leadblow iOS Tests-Info.plist"; sourceTree = "<group>"; };
@@ -391,6 +394,7 @@
 				9796BCE818E409D40018A9A4 /* Purchase.mm */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+				9796BCFC18E56BD10018A9A4 /* Store.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -576,6 +580,7 @@
 				9796BCE618E3FFA70018A9A4 /* Purchase.h */,
 				97D387F918D072A80087853C /* RandomImpl.cpp */,
 				97D387FA18D072A80087853C /* RandomImpl.h */,
+				9796BCFA18E56B9F0018A9A4 /* Store.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 			files = (
 				9796BCF418E54C3A0018A9A4 /* GamePlatform.mm in Sources */,
 				97D387FB18D072A80087853C /* RandomImpl.cpp in Sources */,
+				9796BCFD18E56BD10018A9A4 /* Store.mm in Sources */,
 				9796BCE918E409D40018A9A4 /* Purchase.mm in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,

@@ -31,7 +31,7 @@
 - (void)report:(int)score
 {
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        NSDictionary *ids = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ids" ofType:@"plist"]][@"Root"];
+        NSDictionary *ids = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ids" ofType:@"plist"]];
         GKScore* gkScore = [[GKScore alloc] initWithLeaderboardIdentifier:ids[@"leaderboard"]];
         gkScore.value = score;
         [GKScore reportScores:@[gkScore] withCompletionHandler:^(NSError *error) {
