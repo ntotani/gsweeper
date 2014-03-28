@@ -61,6 +61,10 @@
 		9796BCE918E409D40018A9A4 /* Purchase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCE818E409D40018A9A4 /* Purchase.mm */; };
 		9796BCEC18E508000018A9A4 /* InappPurchase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCEB18E508000018A9A4 /* InappPurchase.mm */; };
 		9796BCEE18E514FE0018A9A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9796BCED18E514FE0018A9A4 /* StoreKit.framework */; };
+		9796BCF018E519450018A9A4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9796BCEF18E519450018A9A4 /* GameKit.framework */; };
+		9796BCF418E54C3A0018A9A4 /* GamePlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCF318E54C3A0018A9A4 /* GamePlatform.mm */; };
+		9796BCF718E553020018A9A4 /* GamePlatform_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 9796BCF618E553020018A9A4 /* GamePlatform_objc.m */; };
+		9796BCF918E55D460018A9A4 /* ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9796BCF818E55D460018A9A4 /* ids.plist */; };
 		97D387DF18D071920087853C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D387DE18D071920087853C /* XCTest.framework */; };
 		97D387E018D071920087853C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		97D387E118D071920087853C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -281,6 +285,12 @@
 		9796BCEA18E508000018A9A4 /* InappPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InappPurchase.h; sourceTree = "<group>"; };
 		9796BCEB18E508000018A9A4 /* InappPurchase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InappPurchase.mm; sourceTree = "<group>"; };
 		9796BCED18E514FE0018A9A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		9796BCEF18E519450018A9A4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
+		9796BCF118E52BDE0018A9A4 /* GamePlatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GamePlatform.h; path = ../../Classes/Common/GamePlatform.h; sourceTree = "<group>"; };
+		9796BCF318E54C3A0018A9A4 /* GamePlatform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GamePlatform.mm; sourceTree = "<group>"; };
+		9796BCF518E553020018A9A4 /* GamePlatform_objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlatform_objc.h; sourceTree = "<group>"; };
+		9796BCF618E553020018A9A4 /* GamePlatform_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePlatform_objc.m; sourceTree = "<group>"; };
+		9796BCF818E55D460018A9A4 /* ids.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ids.plist; sourceTree = "<group>"; };
 		97D387DD18D071920087853C /* leadblow iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "leadblow iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97D387DE18D071920087853C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		97D387E418D071920087853C /* leadblow iOS Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "leadblow iOS Tests-Info.plist"; sourceTree = "<group>"; };
@@ -306,6 +316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9796BCF018E519450018A9A4 /* GameKit.framework in Frameworks */,
 				9796BCEE18E514FE0018A9A4 /* StoreKit.framework in Frameworks */,
 				978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
@@ -367,7 +378,12 @@
 			children = (
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
 				503AE0FB17EB989F00D1A890 /* AppController.mm */,
+				9796BCF318E54C3A0018A9A4 /* GamePlatform.mm */,
+				9796BCF518E553020018A9A4 /* GamePlatform_objc.h */,
+				9796BCF618E553020018A9A4 /* GamePlatform_objc.m */,
 				5087E77117EB970100C73F5D /* Icons */,
+				9796BCEA18E508000018A9A4 /* InappPurchase.h */,
+				9796BCEB18E508000018A9A4 /* InappPurchase.mm */,
 				9763853D18E04A1E000B2252 /* LBFileUtils.mm */,
 				978AD54D18D80A5B00806ED5 /* LBSocial.mm */,
 				503AE0FC17EB989F00D1A890 /* main.m */,
@@ -375,8 +391,6 @@
 				9796BCE818E409D40018A9A4 /* Purchase.mm */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
-				9796BCEA18E508000018A9A4 /* InappPurchase.h */,
-				9796BCEB18E508000018A9A4 /* InappPurchase.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -438,6 +452,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9796BCEF18E519450018A9A4 /* GameKit.framework */,
 				9796BCED18E514FE0018A9A4 /* StoreKit.framework */,
 				978AD54F18D80DFA00806ED5 /* Social.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
@@ -486,19 +501,20 @@
 				5087E77217EB970100C73F5D /* Default-568h@2x.png */,
 				5087E77317EB970100C73F5D /* Default.png */,
 				5087E77417EB970100C73F5D /* Default@2x.png */,
-				50EF62A017ECD613001EB2F8 /* Icon-29.png */,
-				50EF62A117ECD613001EB2F8 /* Icon-50.png */,
-				50EF629217ECD46A001EB2F8 /* Icon-40.png */,
-				50EF629317ECD46A001EB2F8 /* Icon-58.png */,
-				50EF629417ECD46A001EB2F8 /* Icon-80.png */,
 				50EF629517ECD46A001EB2F8 /* Icon-100.png */,
 				5087E77517EB970100C73F5D /* Icon-114.png */,
 				5087E77617EB970100C73F5D /* Icon-120.png */,
 				5087E77717EB970100C73F5D /* Icon-144.png */,
 				5087E77817EB970100C73F5D /* Icon-152.png */,
+				50EF62A017ECD613001EB2F8 /* Icon-29.png */,
+				50EF629217ECD46A001EB2F8 /* Icon-40.png */,
+				50EF62A117ECD613001EB2F8 /* Icon-50.png */,
 				5087E77917EB970100C73F5D /* Icon-57.png */,
+				50EF629317ECD46A001EB2F8 /* Icon-58.png */,
 				5087E77A17EB970100C73F5D /* Icon-72.png */,
 				5087E77B17EB970100C73F5D /* Icon-76.png */,
+				50EF629417ECD46A001EB2F8 /* Icon-80.png */,
+				9796BCF818E55D460018A9A4 /* ids.plist */,
 				5087E77C17EB970100C73F5D /* Info.plist */,
 			);
 			name = Icons;
@@ -553,6 +569,7 @@
 		97D387F718D072A80087853C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9796BCF118E52BDE0018A9A4 /* GamePlatform.h */,
 				97D387F818D072A80087853C /* IRandom.h */,
 				9763853B18E049B7000B2252 /* LBFileUtils.h */,
 				978AD54518D80A2300806ED5 /* LBSocial.h */,
@@ -768,6 +785,7 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				9796BCF918E55D460018A9A4 /* ids.plist in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
@@ -802,11 +820,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9796BCF418E54C3A0018A9A4 /* GamePlatform.mm in Sources */,
 				97D387FB18D072A80087853C /* RandomImpl.cpp in Sources */,
 				9796BCE918E409D40018A9A4 /* Purchase.mm in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				978AD54E18D80A5B00806ED5 /* LBSocial.mm in Sources */,
+				9796BCF718E553020018A9A4 /* GamePlatform_objc.m in Sources */,
 				9796BCEC18E508000018A9A4 /* InappPurchase.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
