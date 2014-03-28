@@ -20,9 +20,11 @@ bool TitleScene::init()
         return false;
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point origin = Director::getInstance()->getVisibleOrigin();
+    origin.y += 100;
 
-    auto label = LabelTTF::create("Greedy Sweeper", "Arial", 64);
+    auto label = LabelTTF::create("GREED SWEEPER", "Arial", 64);
     label->setColor(Color3B(0, 0, 0));
     label->setPosition(Point(origin.x + visibleSize.width/2,
                              origin.y + visibleSize.height - label->getContentSize().height));

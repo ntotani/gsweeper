@@ -30,7 +30,9 @@ bool ResultScene::initWithScores(std::vector<int> scores)
         return false;
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point origin = Director::getInstance()->getVisibleOrigin();
+    origin.y += 100;
 
     auto ud = UserDefault::getInstance();
     int highScore = ud->getIntegerForKey("highScore");
@@ -43,15 +45,15 @@ bool ResultScene::initWithScores(std::vector<int> scores)
     }
 
     auto tweetButton = AppDelegate::createButton("button_twitter.png", "");
-    tweetButton->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scores.size() * 48) + origin);
+    tweetButton->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scores.size() * 48));
     addChild(tweetButton);
 
     auto facebookButton = AppDelegate::createButton("button_facebook.png", "");
-    facebookButton->setPosition(tweetButton->getPosition() + Point(0, -facebookButton->getContentSize().height) + origin);
+    facebookButton->setPosition(tweetButton->getPosition() + Point(0, -facebookButton->getContentSize().height));
     addChild(facebookButton);
 
     auto okButton = AppDelegate::createButton("button_primary.png", "OK");
-    okButton->setPosition(facebookButton->getPosition() + Point(0, -facebookButton->getContentSize().height) + origin);
+    okButton->setPosition(facebookButton->getPosition() + Point(0, -facebookButton->getContentSize().height));
     okButton->addTouchEventListener(this, toucheventselector(ResultScene::onOkButtonTouch));
     addChild(okButton);
 

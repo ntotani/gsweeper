@@ -200,7 +200,9 @@ void GameScene::resetTiles()
     sprites.clear();
     openCount = 0;
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point origin = Director::getInstance()->getVisibleOrigin();
+    origin.y += 100;
     Point base = Point((visibleSize.width - TILE_LEN * col) / 2, (visibleSize.height - TILE_LEN * row) / 2);
     for (int i=0; i<row; i++) {
         tiles.push_back({});
@@ -266,7 +268,9 @@ void GameScene::parseTile(int i, int j) {
 void GameScene::adjustScoreLabel()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point origin = Director::getInstance()->getVisibleOrigin();
+    origin.y += 100;
     for (int i=0; i<scores.size(); i++) {
         if (scores.size() > 1) {
             scoreLabels[i]->setString(StringUtils::format("%dP SCORE: %d", i + 1, scores[i]));
@@ -281,7 +285,9 @@ void GameScene::adjustScoreLabel()
 void GameScene::adjustDropBtn()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point origin = Director::getInstance()->getVisibleOrigin();
+    origin.y += 100;
     dropBtn->setPosition(Point(visibleSize.width / 2, (visibleSize.height - row * TILE_LEN) / 4.0f) + origin);
 }
 
