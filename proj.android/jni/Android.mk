@@ -10,6 +10,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Scene/Title/TitleScene.cpp \
                    hellocpp/Purchase.cpp \
+                   hellocpp/Store.cpp \
+                   hellocpp/GamePlatform.cpp \
                    hellocpp/LBSocial.cpp \
                    hellocpp/LBFileUtils.cpp
 

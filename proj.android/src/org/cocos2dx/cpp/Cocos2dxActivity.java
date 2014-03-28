@@ -10,6 +10,8 @@ import jp.co.septeni.original.leadblow.billing.IabHelper.OnIabPurchaseFinishedLi
 import jp.co.septeni.original.leadblow.billing.Purchase;
 import jp.co.septeni.original.leadblow.billing.IabHelper.OnIabSetupFinishedListener;
 import jp.co.septeni.original.leadblow.billing.IabResult;
+import jp.co.septeni.original.leadblow.gameservice.GameHelper;
+import jp.co.septeni.original.leadblow.gameservice.GameHelper.GameHelperListener;
 import android.app.NativeActivity;
 import android.content.ComponentName;
 import android.content.ContentValues;
@@ -18,9 +20,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
-import android.util.Log;
 
 import com.facebook.LoggingBehavior;
 import com.facebook.Session;
@@ -28,18 +30,23 @@ import com.facebook.Session.NewPermissionsRequest;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.Settings;
+import com.google.android.gms.games.Games;
 
 public class Cocos2dxActivity extends NativeActivity{
 
 	private static Cocos2dxActivity that = null;
 	private static final String PERMISSION = "publish_actions";
 	private IabHelper iabHelper;
+	private GameHelper gameHelper;
 	public static int IAB_REQUEST_CODE = 10001;
+	public static int LEADERBOARD_REQUEST_CODE = 10002;
+	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		that = this;
+		handler = new Handler();
 
 		Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         Session session = Session.getActiveSession();
@@ -55,15 +62,24 @@ public class Cocos2dxActivity extends NativeActivity{
 
         String base64PublicKey = getString(R.string.iab_key);
         iabHelper = new IabHelper(this, base64PublicKey);
-		if (BuildConfig.DEBUG) {
-			iabHelper.enableDebugLogging(true);
-		}
+		iabHelper.enableDebugLogging(BuildConfig.DEBUG);
         iabHelper.startSetup(new OnIabSetupFinishedListener() {
 			@Override
 			public void onIabSetupFinished(IabResult result) {
 				if (result.isFailure()) {
-					Log.d("", result.getMessage());
+					// fail
 				}
+			}
+		});
+
+        gameHelper =  new GameHelper(this, GameHelper.CLIENT_GAMES);
+        gameHelper.enableDebugLog(BuildConfig.DEBUG);
+        gameHelper.setup(new GameHelperListener() {
+			@Override
+			public void onSignInSucceeded() {
+			}
+			@Override
+			public void onSignInFailed() {
 			}
 		});
 
@@ -191,6 +207,13 @@ public class Cocos2dxActivity extends NativeActivity{
 		return that.getCacheDir().getAbsolutePath();
 	}
 
+	public static void openReviewPage() {
+		Intent intent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse("https://play.google.com/store/apps/details?id="
+						+ that.getPackageName() + "&hl=ja"));
+		that.startActivity(intent);
+	}
+
 	public static void purchase(String productID) {
 		that.launchPurchaseFlow(productID);
 	}
@@ -207,6 +230,29 @@ public class Cocos2dxActivity extends NativeActivity{
 				onPurchase(result.getMessage());
 			}
 		});
+	}
+
+	public static void showGamePlatform() {
+		that.showGamePlatform_();
+	}
+
+	private void showGamePlatform_() {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				if (gameHelper.isSignedIn()) {
+					Intent intent = Games.Leaderboards
+							.getAllLeaderboardsIntent(gameHelper.getApiClient());
+					startActivityForResult(intent, LEADERBOARD_REQUEST_CODE);
+				} else {
+					gameHelper.beginUserInitiatedSignIn();
+				}
+			}
+		});
+	}
+
+	public static void reportScore(int score) {
+//		Games.Leaderboards.submitScore(helper.getApiClient(), boardid, score);
 	}
 
 }

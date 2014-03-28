@@ -1,8 +1,9 @@
 #import "Purchase.h"
-
-static function<void(string)> purchaseCallback;
+#import "InappPurchase.h"
 
 void Purchase::purchase(const char* productID, function<void(string)> callback) {
-    purchaseCallback = callback;
-    purchaseCallback("hoge");
+    auto iap = [[InappPurchase alloc] init];
+    [iap requestPurchasing:[NSString stringWithUTF8String:productID] withCallback:^(NSString* message) {
+        callback(string([message UTF8String]));
+    }];
 }
