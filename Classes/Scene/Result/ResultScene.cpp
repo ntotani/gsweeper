@@ -1,6 +1,7 @@
 #include "ResultScene.h"
 #include "AppDelegate.h"
 #include "../Title/TitleScene.h"
+#include "../../Common/GamePlatform.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -52,8 +53,13 @@ bool ResultScene::initWithScores(std::vector<int> scores)
     facebookButton->setPosition(tweetButton->getPosition() + Point(0, -facebookButton->getContentSize().height));
     addChild(facebookButton);
 
+    auto rankButton = AppDelegate::createButton("button_primary.png", "RANKING");
+    rankButton->setPosition(facebookButton->getPosition() + Point(0, -rankButton->getContentSize().height));
+    rankButton->addTouchEventListener(this, toucheventselector(ResultScene::onRankButtonTouch));
+    addChild(rankButton);
+
     auto okButton = AppDelegate::createButton("button_primary.png", "OK");
-    okButton->setPosition(facebookButton->getPosition() + Point(0, -facebookButton->getContentSize().height));
+    okButton->setPosition(rankButton->getPosition() + Point(0, -rankButton->getContentSize().height));
     okButton->addTouchEventListener(this, toucheventselector(ResultScene::onOkButtonTouch));
     addChild(okButton);
 
@@ -77,4 +83,12 @@ void ResultScene::onOkButtonTouch(Ref* target, TouchEventType type)
         return;
     }
     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, TitleScene::createScene(), Color3B(255, 255, 255)));
+}
+
+void ResultScene::onRankButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type != TouchEventType::TOUCH_EVENT_ENDED) {
+        return;
+    }
+    GamePlatform::show();
 }

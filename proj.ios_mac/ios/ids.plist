@@ -5,6 +5,6 @@
 	<key>appstore</key>
 	<string>hoge</string>
 	<key>leaderboard</key>
-	<string>hoge</string>
+	<string>highscore</string>
 </dict>
 </plist>

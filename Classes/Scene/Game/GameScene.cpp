@@ -3,6 +3,7 @@
 #include "../Result/ResultScene.h"
 #include "../Title/TitleScene.h"
 #include "SimpleAudioEngine.h"
+#include "../../Common/GamePlatform.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -92,6 +93,7 @@ void GameScene::onDropButtonTouch(Ref* target, TouchEventType type)
     if (scores[currentTurn] > highScore) {
         ud->setIntegerForKey("highScore", scores[currentTurn]);
         ud->flush();
+        GamePlatform::reportScore(scores[currentTurn]);
     }
     if (dropedAll()) {
         Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
@@ -119,7 +121,9 @@ void GameScene::onTopButtonTouch(Ref* target, TouchEventType type)
 void GameScene::onTouchEnded(Touch* touch, Event* event)
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize.height -= 100;
     Point base = Point((visibleSize.width - TILE_LEN * col) / 2, (visibleSize.height - TILE_LEN * row) / 2);
+    base.y += 100;
     Point p = touch->getLocation();
     p = (p - base) / TILE_LEN;
     if (!outObBounds(p.y, p.x) && sprites[p.y][p.x] && sprites[p.y][p.x]->getOpacity() == 255) {
