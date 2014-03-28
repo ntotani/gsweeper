@@ -33,6 +33,8 @@
             android:label="@string/title_activity_facebook"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
+        <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_game_id" />
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     </application>
 
     <supports-screens android:anyDensity="true"
