@@ -4,7 +4,8 @@ Resources
 Thumbs.db
 
 # Ignore files build by ndk and eclipse
-libs/
+proj.android/libs/armeabi/
+proj.android/libs/x86/
 bin/
 obj/
 gen/
