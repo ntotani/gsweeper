@@ -191,6 +191,13 @@ public class Cocos2dxActivity extends NativeActivity{
 		return that.getCacheDir().getAbsolutePath();
 	}
 
+	public static void openReviewPage() {
+		Intent intent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse("https://play.google.com/store/apps/details?id="
+						+ that.getPackageName() + "&hl=ja"));
+		that.startActivity(intent);
+	}
+
 	public static void purchase(String productID) {
 		that.launchPurchaseFlow(productID);
 	}
