@@ -80,6 +80,8 @@
 		C60375D218E686AB0043DED4 /* icon_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = C60375CF18E686AB0043DED4 /* icon_fb.png */; };
 		C60375D318E686AB0043DED4 /* icon_rank.png in Resources */ = {isa = PBXBuildFile; fileRef = C60375D018E686AB0043DED4 /* icon_rank.png */; };
 		C60375D418E686AB0043DED4 /* icon_tw.png in Resources */ = {isa = PBXBuildFile; fileRef = C60375D118E686AB0043DED4 /* icon_tw.png */; };
+		C60375D818E692190043DED4 /* badge_score.png in Resources */ = {isa = PBXBuildFile; fileRef = C60375D718E692190043DED4 /* badge_score.png */; };
+		C60375DA18E694E10043DED4 /* badge_win.png in Resources */ = {isa = PBXBuildFile; fileRef = C60375D918E694E10043DED4 /* badge_win.png */; };
 		C67470DE18E45D8200D1F405 /* ResultScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67470DC18E45D8200D1F405 /* ResultScene.cpp */; };
 		C67470E118E45D9000D1F405 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67470DF18E45D9000D1F405 /* GameScene.cpp */; };
 		C69A861C18E5B87700ACF54A /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C69A861B18E5B87700ACF54A /* libGoogleAdMobAds.a */; };
@@ -342,6 +344,8 @@
 		C60375CF18E686AB0043DED4 /* icon_fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb.png; sourceTree = "<group>"; };
 		C60375D018E686AB0043DED4 /* icon_rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rank.png; sourceTree = "<group>"; };
 		C60375D118E686AB0043DED4 /* icon_tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_tw.png; sourceTree = "<group>"; };
+		C60375D718E692190043DED4 /* badge_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_score.png; sourceTree = "<group>"; };
+		C60375D918E694E10043DED4 /* badge_win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_win.png; sourceTree = "<group>"; };
 		C67470DC18E45D8200D1F405 /* ResultScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultScene.cpp; sourceTree = "<group>"; };
 		C67470DD18E45D8200D1F405 /* ResultScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultScene.h; sourceTree = "<group>"; };
 		C67470DF18E45D9000D1F405 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C60375D718E692190043DED4 /* badge_score.png */,
+				C60375D918E694E10043DED4 /* badge_win.png */,
 				C69A862718E668C400ACF54A /* block.png */,
 				C69A862818E668C400ACF54A /* bomb.png */,
 				C69A862918E668C400ACF54A /* button_danger.png */,
@@ -926,6 +932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C60375D818E692190043DED4 /* badge_score.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				C69A864A18E668C400ACF54A /* num_6.png in Resources */,
 				C69A864218E668C400ACF54A /* button_rank.png in Resources */,
@@ -960,6 +967,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				C69A864B18E668C400ACF54A /* num_7.png in Resources */,
 				C60375D218E686AB0043DED4 /* icon_fb.png in Resources */,
+				C60375DA18E694E10043DED4 /* badge_win.png in Resources */,
 				C69A864418E668C400ACF54A /* num_0.png in Resources */,
 				C69A863E18E668C400ACF54A /* button_danger.png in Resources */,
 				C69A865018E668C400ACF54A /* tutorial.png in Resources */,

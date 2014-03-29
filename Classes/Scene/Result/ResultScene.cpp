@@ -2,6 +2,7 @@
 #include "AppDelegate.h"
 #include "../Title/TitleScene.h"
 #include "../../Common/GamePlatform.h"
+#include "../../Common/LBSocial.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -37,7 +38,8 @@ bool ResultScene::initWithScores(std::vector<int> scores)
 
     auto ud = UserDefault::getInstance();
     int highScore = ud->getIntegerForKey("highScore");
-
+    int scoreMax = *(std::max_element(scores.begin(), scores.end()));
+    int maxCount = static_cast<int>(std::count(scores.begin(), scores.end(), scoreMax));
     float scoreBottom = 0;
     for (int i=0; i<scores.size(); i++) {
         auto prefix = "";
@@ -50,11 +52,23 @@ bool ResultScene::initWithScores(std::vector<int> scores)
         float top = (visibleSize.height - labHei * scores.size()) / 2;
         scoreLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height - top - labHei * (i + 0.5f)) + origin);
         addChild(scoreLabel);
+        if (scores.size() == 1 && scores[i] >= highScore) {
+            auto badge = Sprite::create("badge_score.png");
+            badge->setPosition(scoreLabel->getPosition() + Point(scoreLabel->getContentSize()) / 2 + Point(10, 10));
+            addChild(badge);
+        }
+        if (scores.size() > 1 && maxCount == 1 && scores[i] == scoreMax) {
+            auto badge = Sprite::create("badge_win.png");
+            badge->setPosition(scoreLabel->getPosition() + Point(-(scoreLabel->getContentSize().width + badge->getContentSize().width) / 2, 0));
+            addChild(badge);
+        }
         scoreBottom = scoreLabel->getPositionY() - labHei / 2;
     }
 
     auto tweetButton = AppDelegate::createButton("icon_tw.png", "");
+    tweetButton->addTouchEventListener(this, toucheventselector(ResultScene::onTweetButtonTouch));
     auto facebookButton = AppDelegate::createButton("icon_fb.png", "");
+    facebookButton->addTouchEventListener(this, toucheventselector(ResultScene::onFacebookButtonTouch));
     auto rankButton = AppDelegate::createButton("icon_rank.png", "");
     rankButton->addTouchEventListener(this, toucheventselector(ResultScene::onRankButtonTouch));
 
@@ -91,6 +105,27 @@ void ResultScene::onOkButtonTouch(Ref* target, TouchEventType type)
         return;
     }
     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, TitleScene::createScene(), Color3B(255, 255, 255)));
+}
+
+void ResultScene::onTweetButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type != TouchEventType::TOUCH_EVENT_ENDED) {
+        return;
+    }
+    AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
+        LBSocial::tweet("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+    });
+}
+
+void ResultScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type != TouchEventType::TOUCH_EVENT_ENDED) {
+        return;
+    }
+    GamePlatform::show();
+    AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
+        LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+    });
 }
 
 void ResultScene::onRankButtonTouch(Ref* target, TouchEventType type)

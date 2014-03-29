@@ -15,6 +15,8 @@ public:
     CREATE_FUNC(ResultScene);
     void onTouchEnded(Touch* touch, Event* event);
     void onOkButtonTouch(Ref* target, TouchEventType type);
+    void onTweetButtonTouch(Ref* target, TouchEventType type);
+    void onFacebookButtonTouch(Ref* target, TouchEventType type);
     void onRankButtonTouch(Ref* target, TouchEventType type);
 private:
     std::vector<int> scores;
