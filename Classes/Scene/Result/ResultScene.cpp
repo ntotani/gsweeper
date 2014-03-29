@@ -38,28 +38,37 @@ bool ResultScene::initWithScores(std::vector<int> scores)
     auto ud = UserDefault::getInstance();
     int highScore = ud->getIntegerForKey("highScore");
 
+    float scoreBottom = 0;
     for (int i=0; i<scores.size(); i++) {
-        auto scoreLabel = LabelTTF::create(StringUtils::format("SCORE: %d", scores[i]), "Arial", 48);
+        auto prefix = "";
+        if (scores.size() > 1) {
+            prefix = StringUtils::format("%dP ", i + 1).c_str();
+        }
+        auto scoreLabel = LabelTTF::create(StringUtils::format("%sSCORE: %d", prefix, scores[i]), "Arial", 48);
         scoreLabel->setColor(Color3B(0, 0, 0));
-        scoreLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scoreLabel->getContentSize().height * i) + origin);
+        float labHei = scoreLabel->getContentSize().height;
+        float top = (visibleSize.height - labHei * scores.size()) / 2;
+        scoreLabel->setPosition(Point(visibleSize.width / 2, visibleSize.height - top - labHei * (i + 0.5f)) + origin);
         addChild(scoreLabel);
+        scoreBottom = scoreLabel->getPositionY() - labHei / 2;
     }
 
     auto tweetButton = AppDelegate::createButton("button_twitter.png", "");
-    tweetButton->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2 - scores.size() * 48));
-    addChild(tweetButton);
-
     auto facebookButton = AppDelegate::createButton("button_facebook.png", "");
-    facebookButton->setPosition(tweetButton->getPosition() + Point(0, -facebookButton->getContentSize().height));
-    addChild(facebookButton);
-
-    auto rankButton = AppDelegate::createButton("button_primary.png", "RANKING");
-    rankButton->setPosition(facebookButton->getPosition() + Point(0, -rankButton->getContentSize().height));
+    auto rankButton = AppDelegate::createButton("button_rank.png", "");
     rankButton->addTouchEventListener(this, toucheventselector(ResultScene::onRankButtonTouch));
+
+    float btnMargin = (visibleSize.width - tweetButton->getContentSize().width - facebookButton->getContentSize().width - rankButton->getContentSize().width) / 4;
+    tweetButton->setPosition(Point(btnMargin + tweetButton->getContentSize().width / 2, scoreBottom - tweetButton->getContentSize().height));
+    facebookButton->setPosition(tweetButton->getPosition() + Point(btnMargin + (tweetButton->getContentSize().width + facebookButton->getContentSize().width) / 2, 0));
+    rankButton->setPosition(facebookButton->getPosition() + Point(btnMargin + (facebookButton->getContentSize().width + rankButton->getContentSize().width) / 2, 0));
+
+    addChild(tweetButton);
+    addChild(facebookButton);
     addChild(rankButton);
 
     auto okButton = AppDelegate::createButton("button_primary.png", "OK");
-    okButton->setPosition(rankButton->getPosition() + Point(0, -rankButton->getContentSize().height));
+    okButton->setPosition(Point(visibleSize.width / 2, okButton->getContentSize().height) + origin);
     okButton->addTouchEventListener(this, toucheventselector(ResultScene::onOkButtonTouch));
     addChild(okButton);
 
