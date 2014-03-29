@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
 #include "Common/LBFileUtils.h"
 #include "Scene/Title/TitleScene.h"
-#include "Scene/Result/ResultScene.h"
 
 USING_NS_CC;
 
@@ -32,8 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    //auto scene = TitleScene::createScene();
-    auto scene = ResultScene::createScene({1,3});
+    auto scene = TitleScene::createScene();
 
     srand((unsigned int)time(NULL));
 
@@ -65,7 +63,7 @@ void AppDelegate::screenShot(const char* fileName, std::function<void(std::strin
     auto s = Director::getInstance()->getVisibleSize();
     auto texture = RenderTexture::create(s.width, s.height);
     texture->setPosition(Point(s.width * 0.5f, s.height * 0.5f));
-    texture->begin();
+    texture->beginWithClear(1, 1, 1, 1);
     Director::getInstance()->getRunningScene()->visit();
     texture->end();
     std::string fullpath = LBFileUtils::getCachePath() + fileName;
