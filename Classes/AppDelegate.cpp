@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "Common/LBFileUtils.h"
 #include "Scene/Title/TitleScene.h"
+#include "Scene/Result/ResultScene.h"
 
 USING_NS_CC;
 
@@ -31,7 +32,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = TitleScene::createScene();
+    //auto scene = TitleScene::createScene();
+    auto scene = ResultScene::createScene({1,3});
 
     srand((unsigned int)time(NULL));
 

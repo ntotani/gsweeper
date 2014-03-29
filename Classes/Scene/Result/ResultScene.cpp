@@ -53,15 +53,14 @@ bool ResultScene::initWithScores(std::vector<int> scores)
         scoreBottom = scoreLabel->getPositionY() - labHei / 2;
     }
 
-    auto tweetButton = AppDelegate::createButton("button_twitter.png", "");
-    auto facebookButton = AppDelegate::createButton("button_facebook.png", "");
-    auto rankButton = AppDelegate::createButton("button_rank.png", "");
+    auto tweetButton = AppDelegate::createButton("icon_tw.png", "");
+    auto facebookButton = AppDelegate::createButton("icon_fb.png", "");
+    auto rankButton = AppDelegate::createButton("icon_rank.png", "");
     rankButton->addTouchEventListener(this, toucheventselector(ResultScene::onRankButtonTouch));
 
-    float btnMargin = (visibleSize.width - tweetButton->getContentSize().width - facebookButton->getContentSize().width - rankButton->getContentSize().width) / 4;
-    tweetButton->setPosition(Point(btnMargin + tweetButton->getContentSize().width / 2, scoreBottom - tweetButton->getContentSize().height));
-    facebookButton->setPosition(tweetButton->getPosition() + Point(btnMargin + (tweetButton->getContentSize().width + facebookButton->getContentSize().width) / 2, 0));
-    rankButton->setPosition(facebookButton->getPosition() + Point(btnMargin + (facebookButton->getContentSize().width + rankButton->getContentSize().width) / 2, 0));
+    facebookButton->setPosition(Point(visibleSize.width / 2, scoreBottom - facebookButton->getContentSize().height));
+    tweetButton->setPosition(facebookButton->getPosition() + Point(-facebookButton->getContentSize().width - 10, 0));
+    rankButton->setPosition(facebookButton->getPosition() + Point(facebookButton->getContentSize().width + 10, 0));
 
     addChild(tweetButton);
     addChild(facebookButton);
