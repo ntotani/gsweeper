@@ -3,6 +3,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "Flurry.h"
 
 @implementation AppController
 
@@ -12,7 +13,10 @@
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"V6CR55MGFVRB3TGTHJSN"];
     
     // Override point for customization after application launch.
 

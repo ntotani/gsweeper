@@ -89,6 +89,13 @@ bool GameScene::initWithPlayerNum(int playerNum)
     listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
     listener->onTouchCancelled = [](Touch* touch, Event* event) {};
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    auto ud = UserDefault::getInstance();
+    if (playerNum > 1 && !ud->getBoolForKey("showRate", false)) {
+        ud->setBoolForKey("showRate", true);
+        ud->flush();
+    }
+
     return true;
 }
 

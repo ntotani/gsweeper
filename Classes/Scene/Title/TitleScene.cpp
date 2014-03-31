@@ -1,6 +1,7 @@
 #include "TitleScene.h"
 #include "../Game/GameScene.h"
 #include "AppDelegate.h"
+#include "../../Common/Store.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -35,11 +36,11 @@ bool TitleScene::init()
     addChild(tutorial);
 
     auto startButton = AppDelegate::createButton("button_dollar.png", "");
-    startButton->setPosition(tutorial->getPosition() + Point(0, -300));
     startButton->addTouchEventListener(this, toucheventselector(TitleScene::onStartButtonTouch));
     addChild(startButton);
 
-    int highScore = UserDefault::getInstance()->getIntegerForKey("highScore", -1);
+    auto ud = UserDefault::getInstance();
+    int highScore = ud->getIntegerForKey("highScore", -1);
     if (highScore > 0) {
         auto scoreLabel = LabelTTF::create(StringUtils::format("HIGH SCORE: %d$", highScore), "Arial", 48);
         scoreLabel->setColor(Color3B(0, 0, 0));
@@ -47,9 +48,21 @@ bool TitleScene::init()
         addChild(scoreLabel);
         
         auto multiButton = AppDelegate::createButton("button_multi.png", "");
-        multiButton->setPosition(startButton->getPosition() + Point(0, -72));
         multiButton->addTouchEventListener(this, toucheventselector(TitleScene::onMultiButtonTouch));
         addChild(multiButton);
+        if (ud->getBoolForKey("showRate", false)) {
+            auto rateBtn = AppDelegate::createButton("button_primary.png", "RATE");
+            rateBtn->addTouchEventListener(this, toucheventselector(TitleScene::onRateButtonTouch));
+            addChild(rateBtn);
+            multiButton->setPosition(Point(visibleSize.width / 2, (visibleSize.height - tutorial->getContentSize().height) / 4) + origin);
+            startButton->setPosition(multiButton->getPosition() + Point(0, 72));
+            rateBtn->setPosition(multiButton->getPosition() + Point(0, -72));
+        } else {
+            startButton->setPosition(Point(visibleSize.width / 2, (visibleSize.height - tutorial->getContentSize().height) / 4 + 36) + origin);
+            multiButton->setPosition(startButton->getPosition() + Point(0, -72));
+        }
+    } else {
+        startButton->setPosition(Point(visibleSize.width / 2, (visibleSize.height - tutorial->getContentSize().height) / 4) + origin);
     }
 
     return true;
@@ -66,5 +79,12 @@ void TitleScene::onMultiButtonTouch(Ref* target, TouchEventType type)
 {
     if (type == TouchEventType::TOUCH_EVENT_ENDED) {
         Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::createScene(2), Color3B(255, 255, 255)));
+    }
+}
+
+void TitleScene::onRateButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type == TouchEventType::TOUCH_EVENT_ENDED) {
+        Store::openReviewPage();
     }
 }

@@ -117,6 +117,7 @@
 		C6B83C8418E98F0A00B30719 /* libAdapterNend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C7E18E98F0A00B30719 /* libAdapterNend.a */; };
 		C6B83C8518E98F0A00B30719 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C7F18E98F0A00B30719 /* libNendAd.a */; };
 		C6B83C8718E9997000B30719 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C8618E9997000B30719 /* Security.framework */; };
+		C6B83C8B18E9B31E00B30719 /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C8A18E9B31E00B30719 /* libFlurry_4.4.0.a */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -403,6 +404,8 @@
 		C6B83C8218E98F0A00B30719 /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
 		C6B83C8318E98F0A00B30719 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
 		C6B83C8618E9997000B30719 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		C6B83C8918E9B31E00B30719 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		C6B83C8A18E9B31E00B30719 /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.4.0.a; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -422,6 +425,7 @@
 				9796BCF018E519450018A9A4 /* GameKit.framework in Frameworks */,
 				9796BCEE18E514FE0018A9A4 /* StoreKit.framework in Frameworks */,
 				978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */,
+				C6B83C8B18E9B31E00B30719 /* libFlurry_4.4.0.a in Frameworks */,
 				C6B83C8518E98F0A00B30719 /* libNendAd.a in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
 				1AC6FB2F180E99EB004C840B /* libchipmunk iOS.a in Frameworks */,
@@ -547,6 +551,7 @@
 				C69A861118E5B87700ACF54A /* admob */,
 				15AA9C4015B7EC450033D6C2 /* Classes */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
+				C6B83C8818E9B31E00B30719 /* flurry */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				080E96DDFE201D6D7F000001 /* ios */,
 				97D387E218D071920087853C /* leadblow iOS Tests */,
@@ -783,6 +788,15 @@
 				C6B83C8318E98F0A00B30719 /* NADView.h */,
 			);
 			path = nend;
+			sourceTree = "<group>";
+		};
+		C6B83C8818E9B31E00B30719 /* flurry */ = {
+			isa = PBXGroup;
+			children = (
+				C6B83C8918E9B31E00B30719 /* Flurry.h */,
+				C6B83C8A18E9B31E00B30719 /* libFlurry_4.4.0.a */,
+			);
+			path = flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1181,6 +1195,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/admob",
 					"$(PROJECT_DIR)/nend",
+					"$(PROJECT_DIR)/flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -1215,6 +1230,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/admob",
 					"$(PROJECT_DIR)/nend",
+					"$(PROJECT_DIR)/flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
