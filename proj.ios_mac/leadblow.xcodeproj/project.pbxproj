@@ -114,6 +114,9 @@
 		C6B83C7818E8FDE800B30719 /* button_dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7718E8FDE800B30719 /* button_dollar.png */; };
 		C6B83C7B18E8FF4D00B30719 /* button_multi.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7918E8FF4D00B30719 /* button_multi.png */; };
 		C6B83C7C18E8FF4D00B30719 /* button_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7A18E8FF4D00B30719 /* button_smile.png */; };
+		C6B83C8418E98F0A00B30719 /* libAdapterNend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C7E18E98F0A00B30719 /* libAdapterNend.a */; };
+		C6B83C8518E98F0A00B30719 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C7F18E98F0A00B30719 /* libNendAd.a */; };
+		C6B83C8718E9997000B30719 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C8618E9997000B30719 /* Security.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -393,6 +396,13 @@
 		C6B83C7718E8FDE800B30719 /* button_dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_dollar.png; sourceTree = "<group>"; };
 		C6B83C7918E8FF4D00B30719 /* button_multi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_multi.png; sourceTree = "<group>"; };
 		C6B83C7A18E8FF4D00B30719 /* button_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_smile.png; sourceTree = "<group>"; };
+		C6B83C7E18E98F0A00B30719 /* libAdapterNend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterNend.a; sourceTree = "<group>"; };
+		C6B83C7F18E98F0A00B30719 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		C6B83C8018E98F0A00B30719 /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
+		C6B83C8118E98F0A00B30719 /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
+		C6B83C8218E98F0A00B30719 /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
+		C6B83C8318E98F0A00B30719 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		C6B83C8618E9997000B30719 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -404,6 +414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B83C8718E9997000B30719 /* Security.framework in Frameworks */,
 				C69A862618E5BAAA00ACF54A /* CoreTelephony.framework in Frameworks */,
 				C69A862418E5B8D600ACF54A /* SystemConfiguration.framework in Frameworks */,
 				C69A862218E5B8C600ACF54A /* MessageUI.framework in Frameworks */,
@@ -411,6 +422,7 @@
 				9796BCF018E519450018A9A4 /* GameKit.framework in Frameworks */,
 				9796BCEE18E514FE0018A9A4 /* StoreKit.framework in Frameworks */,
 				978AD55018D80DFA00806ED5 /* Social.framework in Frameworks */,
+				C6B83C8518E98F0A00B30719 /* libNendAd.a in Frameworks */,
 				1AC6FB2E180E99EB004C840B /* libbox2d iOS.a in Frameworks */,
 				1AC6FB2F180E99EB004C840B /* libchipmunk iOS.a in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2dx iOS.a in Frameworks */,
@@ -424,6 +436,7 @@
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
+				C6B83C8418E98F0A00B30719 /* libAdapterNend.a in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
 				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
 				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
@@ -538,6 +551,7 @@
 				080E96DDFE201D6D7F000001 /* ios */,
 				97D387E218D071920087853C /* leadblow iOS Tests */,
 				503AE10617EB990700D1A890 /* mac */,
+				C6B83C7D18E98F0A00B30719 /* nend */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				78C7DDAA14EBA5050085D0C2 /* Resources */,
 			);
@@ -547,6 +561,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6B83C8618E9997000B30719 /* Security.framework */,
 				C69A862518E5BAAA00ACF54A /* CoreTelephony.framework */,
 				C69A862318E5B8D600ACF54A /* SystemConfiguration.framework */,
 				C69A862118E5B8C600ACF54A /* MessageUI.framework */,
@@ -755,6 +770,19 @@
 				C69A861B18E5B87700ACF54A /* libGoogleAdMobAds.a */,
 			);
 			path = admob;
+			sourceTree = "<group>";
+		};
+		C6B83C7D18E98F0A00B30719 /* nend */ = {
+			isa = PBXGroup;
+			children = (
+				C6B83C7E18E98F0A00B30719 /* libAdapterNend.a */,
+				C6B83C7F18E98F0A00B30719 /* libNendAd.a */,
+				C6B83C8018E98F0A00B30719 /* NADIconArrayView.h */,
+				C6B83C8118E98F0A00B30719 /* NADIconLoader.h */,
+				C6B83C8218E98F0A00B30719 /* NADIconView.h */,
+				C6B83C8318E98F0A00B30719 /* NADView.h */,
+			);
+			path = nend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1150,11 +1178,15 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/admob";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/admob",
+					"$(PROJECT_DIR)/nend",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -1180,11 +1212,15 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/admob";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/admob",
+					"$(PROJECT_DIR)/nend",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -1378,7 +1414,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
@@ -1401,6 +1437,7 @@
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -1409,7 +1446,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1430,6 +1467,7 @@
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				VALIDATE_PRODUCT = YES;
