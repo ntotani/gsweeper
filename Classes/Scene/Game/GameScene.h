@@ -25,6 +25,8 @@ public:
     void onDropButtonTouch(Ref* target, TouchEventType type);
     void onRetryButtonTouch(Ref* target, TouchEventType type);
     void onTopButtonTouch(Ref* target, TouchEventType type);
+    void onTweetButtonTouch(Ref* target, TouchEventType type);
+    void onFacebookButtonTouch(Ref* target, TouchEventType type);
 private:
     int row;
     int col;

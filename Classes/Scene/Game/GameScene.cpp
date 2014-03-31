@@ -4,6 +4,7 @@
 #include "../Title/TitleScene.h"
 #include "SimpleAudioEngine.h"
 #include "../../Common/GamePlatform.h"
+#include "../../Common/LBSocial.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -135,18 +136,36 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
             droped[currentTurn] = true;
             if (dropedAll()) {
                 if (scores.size() == 1) {
+                    scoreLabels[0]->setString("$$$$$$$$$");
+                    for (int i = 0; i<20; i++) {
+                        auto dollar = Sprite::create("dollar.png");
+                        dollar->setRotation(rand() / 360);
+                        dollar->setScale(1.0f * rand() / RAND_MAX + 0.5f);
+                        while (true) {
+                            Point pos = Point(visibleSize.width * rand() / RAND_MAX, visibleSize.height * rand() / RAND_MAX);
+                            if (pos.getDistanceSq(touch->getLocation()) > pow(TILE_LEN * 2, 2) + dollar->getContentSize().width / 2 * dollar->getScale()) {
+                                dollar->setPosition(pos);
+                                break;
+                            }
+                        }
+                        addChild(dollar);
+                    }
                     dropBtn->setOpacity(0);
                     dropBtn->setVisible(false);
-                    auto topBtn = AppDelegate::createButton("button_default.png", "TOP");
-                    topBtn->setTitleColor(Color3B(0, 0, 0));
+                    auto topBtn = AppDelegate::createButton("button_primary.png", "TOP");
                     topBtn->addTouchEventListener(this, toucheventselector(GameScene::onTopButtonTouch));
                     auto retryBtn = AppDelegate::createButton("button_primary.png", "RETRY");
                     retryBtn->addTouchEventListener(this, toucheventselector(GameScene::onRetryButtonTouch));
-                    float margin = (visibleSize.width - retryBtn->getContentSize().width - topBtn->getContentSize().width) / 3;
-                    topBtn->setPosition(Point(margin + topBtn->getContentSize().width / 2, dropBtn->getPositionY()));
-                    retryBtn->setPosition(Point(margin + topBtn->getContentSize().width + margin + retryBtn->getContentSize().width / 2, dropBtn->getPositionY()));
+                    auto tweetButton = AppDelegate::createButton("icon_tw.png", "");
+                    tweetButton->addTouchEventListener(this, toucheventselector(GameScene::onTweetButtonTouch));
+                    auto facebookButton = AppDelegate::createButton("icon_fb.png", "");
+                    facebookButton->addTouchEventListener(this, toucheventselector(GameScene::onFacebookButtonTouch));
+                    tweetButton->setPosition(Point(visibleSize.width / 4 - tweetButton->getContentSize().width / 2 - 10, dropBtn->getPositionY()));
+                    facebookButton->setPosition(Point(visibleSize.width / 4 + facebookButton->getContentSize().width / 2 + 10, dropBtn->getPositionY()));
+                    topBtn->setPosition(Point(visibleSize.width * 3 / 4, dropBtn->getPositionY()));
                     addChild(topBtn);
-                    addChild(retryBtn);
+                    addChild(tweetButton);
+                    addChild(facebookButton);
                 } else {
                     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
                 }
@@ -315,4 +334,25 @@ bool GameScene::dropedAll()
         ret &= e;
     }
     return ret;
+}
+
+void GameScene::onTweetButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type != TouchEventType::TOUCH_EVENT_ENDED) {
+        return;
+    }
+    AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
+        LBSocial::tweet("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+    });
+}
+
+void GameScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
+{
+    if (type != TouchEventType::TOUCH_EVENT_ENDED) {
+        return;
+    }
+    GamePlatform::show();
+    AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
+        LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+    });
 }
