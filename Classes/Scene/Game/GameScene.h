@@ -39,6 +39,8 @@ private:
     vector<LabelTTF*> scoreLabels;
     vector<bool> droped;
     int currentTurn;
+    LabelTTF* levelLabel;
+    int level;
 
     void resetTiles();
     int countMine(int i, int j) const;

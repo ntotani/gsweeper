@@ -10,11 +10,11 @@ USING_NS_CC;
 using namespace ui;
 
 #define TILE_LEN 64
-#define ROW_INIT 9
+#define ROW_INIT 7
 #define COL_INIT 9
-#define MINE_NUM_INIT 10
-#define ROW_LIMIT 15
-#define MINE_NUM_LIMIT 30
+#define MINE_NUM_INIT 7
+#define ROW_LIMIT 12
+#define MINE_NUM_LIMIT 25
 
 Scene* GameScene::createScene(int playerNum)
 {
@@ -52,15 +52,24 @@ bool GameScene::initWithPlayerNum(int playerNum)
     col = COL_INIT;
     mineNum = MINE_NUM_INIT;
     currentTurn = 0;
+    level = 1;
+
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto origin = Director::getInstance()->getVisibleOrigin();
+
     for (int i=0; i<playerNum; i++) {
         scores.push_back(0);
         droped.push_back(false);
-        auto scoreLabel = LabelTTF::create("SCORE: 0", "Arial", 48);
+        auto scoreLabel = LabelTTF::create("SCORE: 0", "Arial", 36);
         scoreLabel->setColor(Color3B(0, 0, 0));
         addChild(scoreLabel);
         scoreLabels.push_back(scoreLabel);
     }
     adjustScoreLabel();
+    levelLabel = LabelTTF::create("LEVEL: 1", "Arial", 36);
+    levelLabel->setColor(Color3B(0, 0, 0));
+    levelLabel->setPosition(Point(levelLabel->getContentSize().width / 2, visibleSize.height - levelLabel->getContentSize().height / 2) + Point(10, -10) + origin);
+    addChild(levelLabel);
     dropBtn = AppDelegate::createButton("button_primary.png", "DROP");
     adjustDropBtn();
     dropBtn->setOpacity(0);
@@ -201,6 +210,8 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
                 float oldRate = 1.0f * mineNum / (row * col);
                 row = std::min(row + 1, ROW_LIMIT);
                 mineNum = std::min((int)(row * col * (oldRate + 0.01f)), MINE_NUM_LIMIT);
+                level += 1;
+                levelLabel->setString(StringUtils::format("LEVEL: %d", level));
                 runAction(Sequence::create(DelayTime::create(duration), CallFunc::create([this](){
                     resetTiles();
                 }), NULL));
@@ -296,12 +307,12 @@ void GameScene::adjustScoreLabel()
     origin.y += 100;
     for (int i=0; i<scores.size(); i++) {
         if (scores.size() > 1) {
-            scoreLabels[i]->setString(StringUtils::format("%dP SCORE: %d", i + 1, scores[i]));
+            scoreLabels[i]->setString(StringUtils::format("%dP: %d$", i + 1, scores[i]));
         } else {
-            scoreLabels[i]->setString(StringUtils::format("SCORE: %d", scores[i]));
+            scoreLabels[i]->setString(StringUtils::format("%d$", scores[i]));
         }
         auto s = scoreLabels[i]->getContentSize();
-        scoreLabels[i]->setPosition(Point(visibleSize.width / 2, visibleSize.height - s.height / 2 - s.height * i) + Point(10, -10) + origin);
+        scoreLabels[i]->setPosition(Point(visibleSize.width - scoreLabels[i]->getContentSize().width / 2, visibleSize.height - s.height / 2 - s.height * i) + Point(-10, -10) + origin);
     }
 }
 
