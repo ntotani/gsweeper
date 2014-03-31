@@ -34,19 +34,19 @@ bool TitleScene::init()
     tutorial->setPosition(Point(visibleSize) / 2 + origin);
     addChild(tutorial);
 
-    auto startButton = AppDelegate::createButton("button_primary.png", "START");
+    auto startButton = AppDelegate::createButton("button_dollar.png", "");
     startButton->setPosition(tutorial->getPosition() + Point(0, -300));
     startButton->addTouchEventListener(this, toucheventselector(TitleScene::onStartButtonTouch));
     addChild(startButton);
 
     int highScore = UserDefault::getInstance()->getIntegerForKey("highScore", -1);
     if (highScore > 0) {
-        auto scoreLabel = LabelTTF::create(StringUtils::format("HIGH SCORE: %d", highScore), "Arial", 48);
+        auto scoreLabel = LabelTTF::create(StringUtils::format("HIGH SCORE: %d$", highScore), "Arial", 48);
         scoreLabel->setColor(Color3B(0, 0, 0));
         scoreLabel->setPosition(label->getPosition() + Point(0, -label->getContentSize().height));
         addChild(scoreLabel);
         
-        auto multiButton = AppDelegate::createButton("button_primary.png", "MULTI");
+        auto multiButton = AppDelegate::createButton("button_multi.png", "");
         multiButton->setPosition(startButton->getPosition() + Point(0, -72));
         multiButton->addTouchEventListener(this, toucheventselector(TitleScene::onMultiButtonTouch));
         addChild(multiButton);

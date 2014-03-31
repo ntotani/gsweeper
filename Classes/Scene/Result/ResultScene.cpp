@@ -46,7 +46,7 @@ bool ResultScene::initWithScores(std::vector<int> scores)
         if (scores.size() > 1) {
             prefix = StringUtils::format("%dP ", i + 1).c_str();
         }
-        auto scoreLabel = LabelTTF::create(StringUtils::format("%sSCORE: %d", prefix, scores[i]), "Arial", 48);
+        auto scoreLabel = LabelTTF::create(StringUtils::format("%sSCORE: %d$", prefix, scores[i]), "Arial", 48);
         scoreLabel->setColor(Color3B(0, 0, 0));
         float labHei = scoreLabel->getContentSize().height;
         float top = (visibleSize.height - labHei * scores.size()) / 2;

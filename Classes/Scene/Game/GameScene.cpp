@@ -70,7 +70,7 @@ bool GameScene::initWithPlayerNum(int playerNum)
     levelLabel->setColor(Color3B(0, 0, 0));
     levelLabel->setPosition(Point(levelLabel->getContentSize().width / 2, visibleSize.height - levelLabel->getContentSize().height / 2) + Point(10, -10) + origin);
     addChild(levelLabel);
-    dropBtn = AppDelegate::createButton("button_primary.png", "DROP");
+    dropBtn = AppDelegate::createButton("button_smile.png", "");
     adjustDropBtn();
     dropBtn->setOpacity(0);
     dropBtn->setVisible(false);
@@ -161,7 +161,7 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
                     }
                     dropBtn->setOpacity(0);
                     dropBtn->setVisible(false);
-                    auto topBtn = AppDelegate::createButton("button_primary.png", "TOP");
+                    auto topBtn = AppDelegate::createButton("button_primary.png", "OK");
                     topBtn->addTouchEventListener(this, toucheventselector(GameScene::onTopButtonTouch));
                     auto retryBtn = AppDelegate::createButton("button_primary.png", "RETRY");
                     retryBtn->addTouchEventListener(this, toucheventselector(GameScene::onRetryButtonTouch));

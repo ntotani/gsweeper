@@ -111,6 +111,9 @@
 		C69A864E18E668C400ACF54A /* se_coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69A863918E668C400ACF54A /* se_coin.mp3 */; };
 		C69A864F18E668C400ACF54A /* se_ob.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69A863A18E668C400ACF54A /* se_ob.mp3 */; };
 		C69A865018E668C400ACF54A /* tutorial.png in Resources */ = {isa = PBXBuildFile; fileRef = C69A863B18E668C400ACF54A /* tutorial.png */; };
+		C6B83C7818E8FDE800B30719 /* button_dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7718E8FDE800B30719 /* button_dollar.png */; };
+		C6B83C7B18E8FF4D00B30719 /* button_multi.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7918E8FF4D00B30719 /* button_multi.png */; };
+		C6B83C7C18E8FF4D00B30719 /* button_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B83C7A18E8FF4D00B30719 /* button_smile.png */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -387,6 +390,9 @@
 		C69A863918E668C400ACF54A /* se_coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_coin.mp3; sourceTree = "<group>"; };
 		C69A863A18E668C400ACF54A /* se_ob.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_ob.mp3; sourceTree = "<group>"; };
 		C69A863B18E668C400ACF54A /* tutorial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial.png; sourceTree = "<group>"; };
+		C6B83C7718E8FDE800B30719 /* button_dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_dollar.png; sourceTree = "<group>"; };
+		C6B83C7918E8FF4D00B30719 /* button_multi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_multi.png; sourceTree = "<group>"; };
+		C6B83C7A18E8FF4D00B30719 /* button_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_smile.png; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -623,9 +629,12 @@
 				C69A862818E668C400ACF54A /* bomb.png */,
 				C69A862918E668C400ACF54A /* button_danger.png */,
 				C69A862A18E668C400ACF54A /* button_default.png */,
+				C6B83C7718E8FDE800B30719 /* button_dollar.png */,
 				C69A862B18E668C400ACF54A /* button_facebook.png */,
+				C6B83C7918E8FF4D00B30719 /* button_multi.png */,
 				C69A862C18E668C400ACF54A /* button_primary.png */,
 				C69A862D18E668C400ACF54A /* button_rank.png */,
+				C6B83C7A18E8FF4D00B30719 /* button_smile.png */,
 				C69A862E18E668C400ACF54A /* button_twitter.png */,
 				C60375DB18E803E80043DED4 /* dollar.png */,
 				C60375CF18E686AB0043DED4 /* icon_fb.png */,
@@ -973,8 +982,11 @@
 				C60375D218E686AB0043DED4 /* icon_fb.png in Resources */,
 				C60375DA18E694E10043DED4 /* badge_win.png in Resources */,
 				C69A864418E668C400ACF54A /* num_0.png in Resources */,
+				C6B83C7818E8FDE800B30719 /* button_dollar.png in Resources */,
 				C69A863E18E668C400ACF54A /* button_danger.png in Resources */,
 				C69A865018E668C400ACF54A /* tutorial.png in Resources */,
+				C6B83C7C18E8FF4D00B30719 /* button_smile.png in Resources */,
+				C6B83C7B18E8FF4D00B30719 /* button_multi.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
