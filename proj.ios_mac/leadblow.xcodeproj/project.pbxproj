@@ -118,6 +118,7 @@
 		C6B83C8518E98F0A00B30719 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C7F18E98F0A00B30719 /* libNendAd.a */; };
 		C6B83C8718E9997000B30719 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C8618E9997000B30719 /* Security.framework */; };
 		C6B83C8B18E9B31E00B30719 /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B83C8A18E9B31E00B30719 /* libFlurry_4.4.0.a */; };
+		C6B83C8F18EB140400B30719 /* LBAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B83C8E18EB140400B30719 /* LBAnalytics.mm */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -406,6 +407,8 @@
 		C6B83C8618E9997000B30719 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C6B83C8918E9B31E00B30719 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		C6B83C8A18E9B31E00B30719 /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.4.0.a; sourceTree = "<group>"; };
+		C6B83C8C18EB136C00B30719 /* LBAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LBAnalytics.h; path = ../../Classes/Common/LBAnalytics.h; sourceTree = "<group>"; };
+		C6B83C8E18EB140400B30719 /* LBAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LBAnalytics.mm; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -494,6 +497,7 @@
 				5087E77117EB970100C73F5D /* Icons */,
 				9796BCEA18E508000018A9A4 /* InappPurchase.h */,
 				9796BCEB18E508000018A9A4 /* InappPurchase.mm */,
+				C6B83C8E18EB140400B30719 /* LBAnalytics.mm */,
 				9763853D18E04A1E000B2252 /* LBFileUtils.mm */,
 				978AD54D18D80A5B00806ED5 /* LBSocial.mm */,
 				503AE0FC17EB989F00D1A890 /* main.m */,
@@ -722,6 +726,7 @@
 			children = (
 				9796BCF118E52BDE0018A9A4 /* GamePlatform.h */,
 				97D387F818D072A80087853C /* IRandom.h */,
+				C6B83C8C18EB136C00B30719 /* LBAnalytics.h */,
 				9763853B18E049B7000B2252 /* LBFileUtils.h */,
 				978AD54518D80A2300806ED5 /* LBSocial.h */,
 				9796BCE618E3FFA70018A9A4 /* Purchase.h */,
@@ -1073,6 +1078,7 @@
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				C67470E118E45D9000D1F405 /* GameScene.cpp in Sources */,
 				97366E2D18D06BDB00314E1C /* TitleScene.cpp in Sources */,
+				C6B83C8F18EB140400B30719 /* LBAnalytics.mm in Sources */,
 				9763853E18E04A1E000B2252 /* LBFileUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

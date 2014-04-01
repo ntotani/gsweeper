@@ -3,6 +3,7 @@
 #include "../Title/TitleScene.h"
 #include "../../Common/GamePlatform.h"
 #include "../../Common/LBSocial.h"
+#include "../../Common/LBAnalytics.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -115,6 +116,7 @@ void ResultScene::onTweetButtonTouch(Ref* target, TouchEventType type)
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
         LBSocial::tweet("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
     });
+    LBAnalytics::logEvent("share", {{"sns", "tw"}, {"result", "true"}});
 }
 
 void ResultScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
@@ -126,6 +128,7 @@ void ResultScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
         LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
     });
+    LBAnalytics::logEvent("share", {{"sns", "fb"}, {"result", "true"}});
 }
 
 void ResultScene::onRankButtonTouch(Ref* target, TouchEventType type)

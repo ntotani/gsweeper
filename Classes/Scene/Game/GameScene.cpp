@@ -5,6 +5,7 @@
 #include "SimpleAudioEngine.h"
 #include "../../Common/GamePlatform.h"
 #include "../../Common/LBSocial.h"
+#include "../../Common/LBAnalytics.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -96,6 +97,12 @@ bool GameScene::initWithPlayerNum(int playerNum)
         ud->flush();
     }
 
+    if (playerNum == 1) {
+        LBAnalytics::startEvent("singlePlay", map<string, string>());
+    } else {
+        LBAnalytics::startEvent("multiPlay", map<string, string>());
+    }
+
     return true;
 }
 
@@ -113,6 +120,11 @@ void GameScene::onDropButtonTouch(Ref* target, TouchEventType type)
         GamePlatform::reportScore(scores[currentTurn]);
     }
     if (dropedAll()) {
+        if (scores.size() == 1) {
+            LBAnalytics::endEvent("singlePlay", {{"result", "true"}, {"score", StringUtils::format("%d", scores[0])}, {"level", StringUtils::format("%d", level)}});
+        } else {
+            LBAnalytics::endEvent("multiPlay", {{"scores", StringUtils::format("%d,%d", scores[0], scores[1])}});
+        }
         Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
     } else {
         stepTurn();
@@ -153,13 +165,13 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
             if (dropedAll()) {
                 if (scores.size() == 1) {
                     scoreLabels[0]->setString("$$$$$$$$$");
-                    for (int i = 0; i<20; i++) {
+                    for (int i = 0; i<30; i++) {
                         auto dollar = Sprite::create("dollar.png");
                         dollar->setRotation(rand() / 360);
                         dollar->setScale(1.0f * rand() / RAND_MAX + 0.5f);
                         while (true) {
                             Point pos = Point(visibleSize.width * rand() / RAND_MAX, visibleSize.height * rand() / RAND_MAX);
-                            if (pos.getDistanceSq(touch->getLocation()) > pow(TILE_LEN * 2, 2) + dollar->getContentSize().width / 2 * dollar->getScale()) {
+                            if (pos.getDistanceSq(touch->getLocation()) > pow(TILE_LEN * 2 + dollar->getContentSize().width / 2 * dollar->getScale(), 2)) {
                                 dollar->setPosition(pos);
                                 break;
                             }
@@ -182,7 +194,9 @@ void GameScene::onTouchEnded(Touch* touch, Event* event)
                     addChild(topBtn);
                     addChild(tweetButton);
                     addChild(facebookButton);
+                    LBAnalytics::endEvent("singlePlay", {{"result", "false"}, {"score", StringUtils::format("%d", scores[0])}, {"level", StringUtils::format("%d", level)}});
                 } else {
+                    LBAnalytics::endEvent("multiPlay", {{"scores", StringUtils::format("%d,%d", scores[0], scores[1])}});
                     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, ResultScene::createScene(scores), Color3B(255, 255, 255)));
                 }
             } else {
@@ -362,6 +376,7 @@ void GameScene::onTweetButtonTouch(Ref* target, TouchEventType type)
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
         LBSocial::tweet("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
     });
+    LBAnalytics::logEvent("share", {{"sns", "tw"}, {"result", "false"}});
 }
 
 void GameScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
@@ -369,8 +384,8 @@ void GameScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
     if (type != TouchEventType::TOUCH_EVENT_ENDED) {
         return;
     }
-    GamePlatform::show();
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
         LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
     });
+    LBAnalytics::logEvent("share", {{"sns", "fb"}, {"result", "false"}});
 }

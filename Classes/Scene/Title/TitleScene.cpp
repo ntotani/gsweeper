@@ -2,6 +2,7 @@
 #include "../Game/GameScene.h"
 #include "AppDelegate.h"
 #include "../../Common/Store.h"
+#include "../../Common/LBAnalytics.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -85,6 +86,7 @@ void TitleScene::onMultiButtonTouch(Ref* target, TouchEventType type)
 void TitleScene::onRateButtonTouch(Ref* target, TouchEventType type)
 {
     if (type == TouchEventType::TOUCH_EVENT_ENDED) {
+        LBAnalytics::logEvent("rate", map<string, string>());
         Store::openReviewPage();
     }
 }
