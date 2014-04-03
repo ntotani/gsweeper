@@ -23,6 +23,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
+import android.view.Gravity;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import com.facebook.LoggingBehavior;
 import com.facebook.Session;
@@ -30,6 +33,10 @@ import com.facebook.Session.NewPermissionsRequest;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.Settings;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
 
 public class Cocos2dxActivity extends NativeActivity{
@@ -41,6 +48,8 @@ public class Cocos2dxActivity extends NativeActivity{
 	public static int IAB_REQUEST_CODE = 10001;
 	public static int LEADERBOARD_REQUEST_CODE = 10002;
 	private Handler handler;
+  private WindowManager wm;
+  private AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +92,41 @@ public class Cocos2dxActivity extends NativeActivity{
 			}
 		});
 
+        adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9353254478629065/4014378631");
+        /*
+        int wc = FrameLayout.LayoutParams.WRAP_CONTENT;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(wc, wc);
+        params.gravity = (Gravity.BOTTOM | Gravity.CENTER);
+        addContentView(adView, params);
+        */
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER;
+        layoutParams.x       = 0;
+        layoutParams.y       = 0;
+        layoutParams.width   = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height  = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.type    = WindowManager.LayoutParams.TYPE_TOAST;  // ゲーム画面より前面に表示
+        layoutParams.flags   = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;  // 自分以外のところがタッチされたとき、背後のビューにタッチイベントを渡す。
+
+        // WindowManagerを取得する
+        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        // WindowManagerにAdMobのビューを追加する。
+        wm.addView(adView, layoutParams);
+
+        AdRequest adRequest = null;
+        if (BuildConfig.DEBUG) {
+            adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
+                .build();
+        } else {
+            adRequest = new AdRequest.Builder().build();
+        }
+        adView.loadAd(adRequest);
+
 		//For supports translucency
 		
 		//1.change "attribs" in cocos\2d\platform\android\nativeactivity.cpp
@@ -118,6 +162,32 @@ public class Cocos2dxActivity extends NativeActivity{
         super.onSaveInstanceState(outState);
         Session session = Session.getActiveSession();
         Session.saveSession(session, outState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        // Destroy the AdView.
+        if (adView != null) {
+            wm.removeView(adView);
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
 	public static void tweet(String message, String filePath) {
