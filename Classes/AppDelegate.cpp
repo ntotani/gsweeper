@@ -20,7 +20,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glView = GLView::create("leadblow");
         director->setOpenGLView(glView);
     }
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 #ifdef COCOS2D_DEBUG
     // turn on display FPS

@@ -28,7 +28,7 @@ Scene* ResultScene::createScene(std::vector<int> scores)
 
 bool ResultScene::initWithScores(std::vector<int> scores)
 {
-    if ( !Layer::init() )
+    if ( !LayerColor::initWithColor(Color4B(255, 255, 255, 255)) )
     {
         return false;
     }

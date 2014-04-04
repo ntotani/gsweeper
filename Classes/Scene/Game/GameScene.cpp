@@ -37,7 +37,7 @@ Scene* GameScene::createScene(int playerNum)
 
 bool GameScene::initWithPlayerNum(int playerNum)
 {
-    if ( !Layer::init() )
+    if ( !LayerColor::initWithColor(Color4B(255, 255, 255, 255)) )
     {
         return false;
     }

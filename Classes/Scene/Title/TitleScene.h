@@ -7,7 +7,7 @@
 USING_NS_CC;
 using namespace ui;
 
-class TitleScene : public Layer
+class TitleScene : public LayerColor
 {
 public:
     static Scene* createScene();

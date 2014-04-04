@@ -7,7 +7,7 @@
 USING_NS_CC;
 using namespace ui;
 
-class ResultScene : public Layer
+class ResultScene : public LayerColor
 {
 public:
     static Scene* createScene(std::vector<int> scores);

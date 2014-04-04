@@ -15,7 +15,7 @@ enum TILE {
     SHOWN_BOMB
 };
 
-class GameScene : public Layer
+class GameScene : public LayerColor
 {
 public:
     static Scene* createScene(int playerNum);

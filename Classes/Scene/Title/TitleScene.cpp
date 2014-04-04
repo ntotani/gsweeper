@@ -17,7 +17,7 @@ Scene* TitleScene::createScene()
 
 bool TitleScene::init()
 {
-    if ( !Layer::init() )
+    if ( !LayerColor::initWithColor(Color4B(255, 255, 255, 255)) )
     {
         return false;
     }
