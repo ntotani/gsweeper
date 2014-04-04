@@ -23,6 +23,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import net.uracon.gsweeper.R;
+
 public class FacebookActivity extends ActionBarActivity {
 
 	private static final String FRAGMENT_TAG = "placeholderFragment";

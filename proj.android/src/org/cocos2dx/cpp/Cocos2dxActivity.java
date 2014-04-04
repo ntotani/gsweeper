@@ -2,9 +2,9 @@ package org.cocos2dx.cpp;
 
 import java.io.File;
 
-import jp.co.septeni.original.leadblow.BuildConfig;
+import net.uracon.gsweeper.BuildConfig;
 import jp.co.septeni.original.leadblow.FacebookActivity;
-import jp.co.septeni.original.leadblow.R;
+import net.uracon.gsweeper.R;
 import jp.co.septeni.original.leadblow.billing.IabHelper;
 import jp.co.septeni.original.leadblow.billing.IabHelper.OnIabPurchaseFinishedListener;
 import jp.co.septeni.original.leadblow.billing.Purchase;
@@ -92,40 +92,9 @@ public class Cocos2dxActivity extends NativeActivity{
 			}
 		});
 
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-9353254478629065/4014378631");
-        /*
-        int wc = FrameLayout.LayoutParams.WRAP_CONTENT;
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(wc, wc);
-        params.gravity = (Gravity.BOTTOM | Gravity.CENTER);
-        addContentView(adView, params);
-        */
-
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER;
-        layoutParams.x       = 0;
-        layoutParams.y       = 0;
-        layoutParams.width   = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams.height  = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams.type    = WindowManager.LayoutParams.TYPE_TOAST;  // ゲーム画面より前面に表示
-        layoutParams.flags   = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;  // 自分以外のところがタッチされたとき、背後のビューにタッチイベントを渡す。
-
         // WindowManagerを取得する
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        // WindowManagerにAdMobのビューを追加する。
-        wm.addView(adView, layoutParams);
-
-        AdRequest adRequest = null;
-        if (BuildConfig.DEBUG) {
-            adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                //.addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
-                .build();
-        } else {
-            adRequest = new AdRequest.Builder().build();
-        }
-        adView.loadAd(adRequest);
+        showAdView();
 
 		//For supports translucency
 		
@@ -155,6 +124,7 @@ public class Cocos2dxActivity extends NativeActivity{
 		super.onActivityResult(requestCode, resultCode, data);
 		Session.getActiveSession().onActivityResult(this, requestCode,
 				resultCode, data);
+    showAdView();
 	}
 
     @Override
@@ -188,6 +158,60 @@ public class Cocos2dxActivity extends NativeActivity{
             adView.destroy();
         }
         super.onDestroy();
+    }
+
+    private void showAdView() {
+        if (adView != null) {
+            return;
+        }
+        adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9353254478629065/4014378631");
+        handler.post(new Runnable() {
+            public void run() {
+                /*
+                int wc = FrameLayout.LayoutParams.WRAP_CONTENT;
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(wc, wc);
+                params.gravity = (Gravity.BOTTOM | Gravity.CENTER);
+                addContentView(adView, params);
+                */
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER;
+                layoutParams.x       = 0;
+                layoutParams.y       = 0;
+                layoutParams.width   = WindowManager.LayoutParams.WRAP_CONTENT;
+                layoutParams.height  = WindowManager.LayoutParams.WRAP_CONTENT;
+                layoutParams.type    = WindowManager.LayoutParams.TYPE_TOAST;  // ゲーム画面より前面に表示
+                layoutParams.flags   = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;  // 自分以外のところがタッチされたとき、背後のビューにタッチイベントを渡す。
+
+                // WindowManagerにAdMobのビューを追加する。
+                wm.addView(adView, layoutParams);
+                AdRequest adRequest = null;
+                if (BuildConfig.DEBUG) {
+                    adRequest = new AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            //.addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
+            .build();
+                } else {
+                    adRequest = new AdRequest.Builder().build();
+                }
+                adView.loadAd(adRequest);
+            }
+        });
+    }
+
+    private void hideAdView() {
+        handler.post(new Runnable() {
+            public void run() {
+                if (null != adView) {
+                    if (null != wm) {
+                        wm.removeView(adView);
+                    }
+                    adView.destroy();
+                    adView = null;
+                }
+            }
+        });
     }
 
 	public static void tweet(String message, String filePath) {
@@ -307,12 +331,13 @@ public class Cocos2dxActivity extends NativeActivity{
 	}
 
 	private void showGamePlatform_() {
+      hideAdView();
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
 				if (gameHelper.isSignedIn()) {
 					Intent intent = Games.Leaderboards
-							.getAllLeaderboardsIntent(gameHelper.getApiClient());
+							.getLeaderboardIntent(gameHelper.getApiClient(), "CgkI7LrTpPUJEAIQAQ");
 					startActivityForResult(intent, LEADERBOARD_REQUEST_CODE);
 				} else {
 					gameHelper.beginUserInitiatedSignIn();
