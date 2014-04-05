@@ -94,7 +94,6 @@ public class Cocos2dxActivity extends NativeActivity{
 
         // WindowManagerを取得する
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        showAdView();
 
 		//For supports translucency
 		
@@ -137,6 +136,7 @@ public class Cocos2dxActivity extends NativeActivity{
     @Override
     public void onResume() {
         super.onResume();
+        showAdView();
         if (adView != null) {
             adView.resume();
         }
@@ -148,6 +148,12 @@ public class Cocos2dxActivity extends NativeActivity{
             adView.pause();
         }
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideAdView();
     }
 
     @Override
