@@ -53,6 +53,7 @@ public class Cocos2dxActivity extends NativeActivity{
 	private Handler handler;
   private WindowManager wm;
   private AdView adView;
+  private boolean showBoardOnSignIn = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +88,22 @@ public class Cocos2dxActivity extends NativeActivity{
         gameHelper =  new GameHelper(this, GameHelper.CLIENT_GAMES);
         gameHelper.enableDebugLog(BuildConfig.DEBUG);
         gameHelper.setup(new GameHelperListener() {
-			@Override
-			public void onSignInSucceeded() {
-			}
-			@Override
-			public void onSignInFailed() {
-			}
-		});
+            @Override
+            public void onSignInSucceeded() {
+                if (showBoardOnSignIn) {
+                    showLeaderBoard();
+                }
+                showBoardOnSignIn = false;
+                int highScore = getSharedPreferences("Cocos2dxPrefsFile", 0).getInt("highScore", -1);
+                if (highScore > 0) {
+                    Games.Leaderboards.submitScore(gameHelper.getApiClient(), "CgkI7LrTpPUJEAIQAQ", highScore);
+                }
+            }
+            @Override
+            public void onSignInFailed() {
+                showBoardOnSignIn = false;
+            }
+        });
 
         // WindowManagerを取得する
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -354,19 +364,25 @@ public class Cocos2dxActivity extends NativeActivity{
 			@Override
 			public void run() {
 				if (gameHelper.isSignedIn()) {
-					Intent intent = Games.Leaderboards
-							.getLeaderboardIntent(gameHelper.getApiClient(), "CgkI7LrTpPUJEAIQAQ");
-					startActivityForResult(intent, LEADERBOARD_REQUEST_CODE);
+					showLeaderBoard();
 				} else {
+            showBoardOnSignIn = true;
 					gameHelper.beginUserInitiatedSignIn();
 				}
 			}
 		});
 	}
 
-	public static void reportScore(int score) {
-//		Games.Leaderboards.submitScore(helper.getApiClient(), boardid, score);
-	}
+  private void showLeaderBoard() {
+      Intent intent = Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(), "CgkI7LrTpPUJEAIQAQ");
+      startActivityForResult(intent, LEADERBOARD_REQUEST_CODE);
+  }
+
+  public static void reportScore(int score) {
+      if (that.gameHelper.isSignedIn()) {
+          Games.Leaderboards.submitScore(that.gameHelper.getApiClient(), "CgkI7LrTpPUJEAIQAQ", score);
+      }
+  }
 
   public static void logEvent(String eventId, Hashtable<String, String> paramMap) {
       logEvent_(eventId, paramMap, true, false);
