@@ -1,6 +1,7 @@
 package org.cocos2dx.cpp;
 
 import java.io.File;
+import java.util.Hashtable;
 
 import net.uracon.gsweeper.BuildConfig;
 import jp.co.septeni.original.leadblow.FacebookActivity;
@@ -38,6 +39,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
+
+import com.flurry.android.FlurryAgent;
 
 public class Cocos2dxActivity extends NativeActivity{
 
@@ -95,6 +98,8 @@ public class Cocos2dxActivity extends NativeActivity{
         // WindowManagerを取得する
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
+        FlurryAgent.setLogEnabled(BuildConfig.DEBUG);
+
 		//For supports translucency
 		
 		//1.change "attribs" in cocos\2d\platform\android\nativeactivity.cpp
@@ -126,6 +131,12 @@ public class Cocos2dxActivity extends NativeActivity{
     showAdView();
 	}
 
+  @Override
+  protected void onStart() {
+      super.onStart();
+      FlurryAgent.onStartSession(this, "XK5G85PB9JXCX5XV2TYM");
+  }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -154,6 +165,7 @@ public class Cocos2dxActivity extends NativeActivity{
     public void onStop() {
         super.onStop();
         hideAdView();
+        FlurryAgent.onEndSession(this);
     }
 
     @Override
@@ -355,5 +367,49 @@ public class Cocos2dxActivity extends NativeActivity{
 	public static void reportScore(int score) {
 //		Games.Leaderboards.submitScore(helper.getApiClient(), boardid, score);
 	}
+
+  public static void logEvent(String eventId, Hashtable<String, String> paramMap) {
+      logEvent_(eventId, paramMap, true, false);
+  }
+
+  public static void startEvent(String eventId, Hashtable<String, String> paramMap) {
+      logEvent_(eventId, paramMap, true, true);
+  }
+
+  public static void endEvent(String eventId, Hashtable<String, String> paramMap) {
+      logEvent_(eventId, paramMap, false, true);
+  }
+
+  private static void logEvent_(String eventId, Hashtable<String, String> paramMap, final boolean start, final boolean timed) {
+      final String curId = eventId;
+      final Hashtable<String, String> curParam = paramMap;
+      that.handler.post(new Runnable() {
+          @Override
+          public void run() {
+              boolean noParam = curParam == null || curParam.isEmpty();
+              if (start) {
+                  if (timed) {
+                      if (noParam) {
+                          FlurryAgent.logEvent(curId, true);
+                      } else {
+                          FlurryAgent.logEvent(curId, curParam, true);
+                      }
+                  } else {
+                      if (noParam) {
+                          FlurryAgent.logEvent(curId);
+                      } else {
+                          FlurryAgent.logEvent(curId, curParam);
+                      }
+                  }
+              } else {
+                  if (noParam) {
+                      FlurryAgent.endTimedEvent(curId);
+                  } else {
+                      FlurryAgent.endTimedEvent(curId, curParam);
+                  }
+              }
+          }
+      });
+  }
 
 }
