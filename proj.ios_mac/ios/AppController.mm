@@ -57,7 +57,7 @@ static AppDelegate s_sharedApplication;
     cocos2d::GLView *glview = cocos2d::GLView::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
-    CGPoint origin = CGPointMake( 0.0, viewController.view.frame.size.height - GAD_SIZE_320x50.height);
+    CGPoint origin = CGPointMake((viewController.view.frame.size.width - GAD_SIZE_320x50.width) / 2, viewController.view.frame.size.height - GAD_SIZE_320x50.height);
     bannerView_ = [[[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin] autorelease];
     bannerView_.adUnitID = @"ca-app-pub-9353254478629065/5950600237";
     [viewController.view addSubview: bannerView_];

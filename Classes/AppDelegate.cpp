@@ -20,6 +20,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glView = GLView::create("leadblow");
         director->setOpenGLView(glView);
     }
+    glView->setDesignResolutionSize(640, 960, ResolutionPolicy::FIXED_WIDTH);
 
 #ifdef COCOS2D_DEBUG
     // turn on display FPS
