@@ -12,29 +12,6 @@
             gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:gcView animated:YES completion:nil];
         }
-    } else {
-    player.authenticateHandler = ^(UIViewController* ui, NSError* error)
-    {
-        if( nil != ui )
-        {
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ui animated:YES completion:nil];
-        }
-        else if(player.isAuthenticated)
-        {
-            NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"];
-            if (value)
-            {
-                [self report:[value intValue]];
-            }
-            GKGameCenterViewController *gcView = [GKGameCenterViewController new];
-            if (gcView != nil)
-            {
-                gcView.gameCenterDelegate = self;
-                gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
-                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:gcView animated:YES completion:nil];
-            }
-        }
-    };
     }
 }
 

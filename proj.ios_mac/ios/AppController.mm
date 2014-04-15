@@ -4,6 +4,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "Flurry.h"
+#import <GameKit/GameKit.h>
 
 @implementation AppController
 
@@ -67,8 +68,16 @@ static AppDelegate s_sharedApplication;
 #endif
     [bannerView_ loadRequest:request];
 
-    cocos2d::Application::getInstance()->run();
+    GKLocalPlayer *player = [GKLocalPlayer localPlayer];
+    player.authenticateHandler = ^(UIViewController* ui, NSError* error)
+    {
+        if( nil != ui )
+        {
+            [viewController presentViewController:ui animated:YES completion:nil];
+        }
+    };
 
+    cocos2d::Application::getInstance()->run();
     return YES;
 }
 

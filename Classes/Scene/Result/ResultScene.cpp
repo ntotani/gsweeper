@@ -124,7 +124,6 @@ void ResultScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
     if (type != TouchEventType::TOUCH_EVENT_ENDED) {
         return;
     }
-    GamePlatform::show();
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
         LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
     });
