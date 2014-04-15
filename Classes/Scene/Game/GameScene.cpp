@@ -13,7 +13,7 @@ using namespace ui;
 #define TILE_LEN 64
 #define ROW_INIT 7
 #define COL_INIT 9
-#define MINE_NUM_INIT 7
+#define MINE_NUM_INIT 6
 #define ROW_LIMIT 12
 #define MINE_NUM_LIMIT 25
 
