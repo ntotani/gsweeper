@@ -139,12 +139,14 @@ public class Cocos2dxActivity extends NativeActivity{
 		Session.getActiveSession().onActivityResult(this, requestCode,
 				resultCode, data);
     showAdView();
+    gameHelper.onActivityResult(requestCode, resultCode, data);
 	}
 
   @Override
   protected void onStart() {
       super.onStart();
       FlurryAgent.onStartSession(this, "XK5G85PB9JXCX5XV2TYM");
+      gameHelper.onStart(this);
   }
 
     @Override
@@ -176,6 +178,7 @@ public class Cocos2dxActivity extends NativeActivity{
         super.onStop();
         hideAdView();
         FlurryAgent.onEndSession(this);
+        gameHelper.onStop();
     }
 
     @Override
