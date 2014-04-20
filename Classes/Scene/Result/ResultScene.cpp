@@ -114,7 +114,7 @@ void ResultScene::onTweetButtonTouch(Ref* target, TouchEventType type)
         return;
     }
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
-        LBSocial::tweet("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+        LBSocial::tweet("GREEEED!!!! http://goo.gl/x5iI8f", filePath.c_str());
     });
     LBAnalytics::logEvent("share", {{"sns", "tw"}, {"result", "true"}});
 }
@@ -125,7 +125,7 @@ void ResultScene::onFacebookButtonTouch(Ref* target, TouchEventType type)
         return;
     }
     AppDelegate::screenShot("screenshot.jpg", [](std::string filePath) {
-        LBSocial::facebook("GREEDY SWEEPER http://goo.gl/x5iI8f", filePath.c_str());
+        LBSocial::facebook("GREEEED!!!! http://goo.gl/x5iI8f", filePath.c_str());
     });
     LBAnalytics::logEvent("share", {{"sns", "fb"}, {"result", "true"}});
 }
